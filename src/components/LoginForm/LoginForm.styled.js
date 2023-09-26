@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  register_form: {
+  login_form: {
     backgroundColor: '#fff',
     padding: 16,
   },
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     top: 16,
     right: 32,
   },
-  registerButton: {
+  loginButton: {
     backgroundColor: '#FF6C00',
     height: 50,
     justifyContent: 'center',
@@ -59,15 +59,15 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginTop: 44,
   },
-  registerButtonText: {
+  loginButtonText: {
     color: '#fff',
     fontWeight: '400',
   },
-  loginLink: {
+  registerLink: {
     marginTop: 16,
     marginBottom: 66,
   },
-  loginLinkText: {
+  registerLinkText: {
     fontStyle: 'normal',
     fontWeight: '400',
     fontSize: 16,

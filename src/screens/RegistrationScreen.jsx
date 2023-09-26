@@ -29,21 +29,6 @@ const RegistrationScreen=()=>{
             title={"Зареєструватися"}> 
             </Button> */}
            
-        <TouchableOpacity
-          style={styles.registerButton}
-          activeOpacity={0.5}
-        >
-          <Text style={styles.registerButtonText}>Register</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.loginLink}
-          activeOpacity={0.5}
-        >
-          <Text style={styles.loginLinkText}>
-            Already have an account? Log in
-          </Text>
-        </TouchableOpacity>
             </KeyboardAvoidingView>
             </ImageBackground>
              

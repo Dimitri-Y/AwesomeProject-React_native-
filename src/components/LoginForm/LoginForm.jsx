@@ -1,11 +1,7 @@
 import { Text, TextInput, View,ScrollView,TouchableOpacity } from 'react-native';
-import styles from './RegistrationForm.styles';
-import  {nanoid}  from 'nanoid';
+import styles from './LoginForm.styled';
 
 const ArrayInput=[
-  {
-    type:"text",name:"login",pattern:"^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",title:"login",placeholder:"Логін",
-  },
   {
     type:"email",name:"email",pattern:"([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})",title:"email",placeholder:"Адреса електронної пошти",
   },
@@ -14,10 +10,10 @@ const ArrayInput=[
   }
 ]
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   return (
-    <View style={styles.register_form}>
-      <Text style={styles.h_text}>Реєстрація</Text>    
+    <View style={styles.login_form}>
+      <Text style={styles.h_text}>Увійти</Text>    
       {/* <ScrollView style={styles.group}>
         {ArrayInput.map((input,index) => 
           (
@@ -35,14 +31,6 @@ const RegistrationForm = () => {
         ))}
       </ScrollView> */}
       <TextInput
-         type="text"
-         name="login"
-         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-         title="login"
-         placeholder="Логін"
-         style={styles.input}
-      />
-      <TextInput
     type="email"
     name="email"
     pattern="([A-z0-9_.-]{1})@([A-z0-9_.-]{1}).([A-z]{28})"
@@ -50,8 +38,7 @@ const RegistrationForm = () => {
     placeholder="Адреса електронної пошти"
     style={styles.input}
     />
-      <View style={styles.input_pass_BG}>
-      
+      <View style={styles.input_pass_BG}>      
       <TextInput
           type="password"
           name="password"
@@ -70,18 +57,18 @@ const RegistrationForm = () => {
         </TouchableOpacity>
         
         <TouchableOpacity
-          style={styles.registerButton}
+          style={styles.loginButton}
           activeOpacity={0.5}
         >
-          <Text style={styles.registerButtonText}>Зареєструватися</Text>
+          <Text style={styles.loginButtonText}>Увійти</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.loginLink}
+          style={styles.registerLink}
           activeOpacity={0.5}
         >
-          <Text style={styles.loginLinkText}>
-          Вже є акаунт? Увійти
+          <Text style={styles.registerLinkText}>
+          Немає акаунту? Зареєструватися
           </Text>
         </TouchableOpacity>
       </View>
@@ -89,4 +76,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;

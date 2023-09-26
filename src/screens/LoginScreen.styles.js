@@ -15,23 +15,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-end',
   },
-  photoContainer: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: -60,
-    marginBottom: 33,
-    height: 120,
-    width: 120,
-    backgroundColor: '#F6F6F6',
-    borderRadius: 16,
-  },
-  addButton: {
-    marginTop: '65%',
-    left: '90%',
-    height: 25,
-    width: 25,
-    pointerEvents: 'auto',
-  },
   passShowText: {
     fontStyle: 'normal',
     fontWeight: '400',

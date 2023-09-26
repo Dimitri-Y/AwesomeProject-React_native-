@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import RegistrationScreen from './src/screens/RegistrationScreen';
 import { useFonts } from 'expo-font';
-
+import LoginScreen from './src/screens/LoginScreen';
 export default function App() {
   const [fontsLoaded] = useFonts({
     'Roboto-400': require('./assets/fonts/Roboto-Regular.ttf'),
@@ -14,7 +14,8 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <RegistrationScreen></RegistrationScreen>
+      {/* <RegistrationScreen></RegistrationScreen> */}
+      <LoginScreen></LoginScreen>
       <StatusBar style="auto" />
     </View>
   );
@@ -26,7 +27,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     // alignItems: 'center',
     width: '100%',
-    padding: 16,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
   },
