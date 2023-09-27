@@ -1,5 +1,5 @@
 import {TextInput} from "react-native";
-import styles from '../RegistrationForm/RegistrationForm.styles';
+import styles from '../RegistrationForm/RegistrationForm.styled';
 
 const Input = ({type,name,title,pattern}) => {
     return(

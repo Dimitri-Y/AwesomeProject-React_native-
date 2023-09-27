@@ -1,5 +1,5 @@
 import { Text, TextInput, View,ScrollView,TouchableOpacity } from 'react-native';
-import styles from './RegistrationForm.styles';
+import styles from './RegistrationForm.styled';
 import  {nanoid}  from 'nanoid';
 
 const ArrayInput=[

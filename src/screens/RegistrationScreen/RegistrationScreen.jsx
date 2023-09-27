@@ -1,4 +1,4 @@
-import RegistrationForm from "../components/RegistrationForm/RegistrationForm";
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 import { StyleSheet,
     Text,
     ImageBackground,
@@ -6,17 +6,19 @@ import { StyleSheet,
     TouchableOpacity,
     KeyboardAvoidingView,
     Platform, } from "react-native";
-import styles from "./RegistrationScreen.styles";
-const buttonImg = require("../../assets/images/add.png");
+import styles from "./RegistrationScreen.styled";
+
+const buttonImg = require("../../../assets/images/add.png");
+
 const RegistrationScreen=()=>{
         return(
-            <ImageBackground source={require("../../assets/images/PhotoBG.png")} resizeMode="cover" style={styles.image}>
+            <ImageBackground source={require("../../../assets/images/PhotoBG.png")} resizeMode="cover" style={styles.image}>
             <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             style={styles.containerKeyB}
           >
-            
-              <View style={styles.photoContainer}>
+           <View style={styles.container}>
+           <View style={styles.photoContainer}>
           <TouchableOpacity style={styles.addButton} activeOpacity={0.5}>
             <ImageBackground
               source={buttonImg}
@@ -27,8 +29,8 @@ const RegistrationScreen=()=>{
             <RegistrationForm></RegistrationForm>
             {/* <Button style={styles.button}
             title={"Зареєструватися"}> 
-            </Button> */}
-           
+            </Button> */} 
+            </View>
             </KeyboardAvoidingView>
             </ImageBackground>
              

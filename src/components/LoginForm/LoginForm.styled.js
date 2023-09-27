@@ -4,6 +4,8 @@ const styles = StyleSheet.create({
   login_form: {
     backgroundColor: '#fff',
     padding: 16,
+    borderTopRightRadius: 50,
+    borderTopLeftRadius: 50,
   },
   h_text: {
     fontFamily: 'Roboto-500',
@@ -25,6 +27,7 @@ const styles = StyleSheet.create({
     borderColor: '#E8E8E8',
     borderRadius: 8,
     padding: 16,
+    width: 343,
   },
   input_pass_BG: {
     position: 'relative',
@@ -44,6 +47,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 16,
     lineHeight: 19,
+    color: '#1B4371',
   },
   passShow: {
     position: 'absolute',
@@ -73,6 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     textAlign: 'center',
+    color: '#1B4371',
   },
 });
 export default styles;
