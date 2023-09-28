@@ -7,9 +7,9 @@ import {
   Keyboard,
 } from 'react-native';
 import { useFonts } from 'expo-font';
-import RegistrationScreen from './src/screens/RegistrationScreen/RegistrationScreen';
-import LoginScreen from './src/screens/LoginScreen/LoginScreen';
-import PostScreen from './src/screens/PostScreen/PostScreen';
+import RegistrationScreen from './src/screens/RegistrationScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import PostScreen from './src/screens/PostScreen';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,9 +23,9 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <RegistrationScreen></RegistrationScreen>
+        {/* <RegistrationScreen></RegistrationScreen> */}
         {/* <LoginScreen></LoginScreen> */}
-        {/* <PostScreen></PostScreen> */}
+        <PostScreen></PostScreen>
         <StatusBar style="auto" />
       </View>
     </TouchableWithoutFeedback>
