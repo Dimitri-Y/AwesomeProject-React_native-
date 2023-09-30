@@ -1,6 +1,9 @@
 import { Text, TextInput, View,ScrollView,TouchableOpacity,StyleSheet } from 'react-native';
 import  {nanoid}  from 'nanoid';
-import { useState } from 'react';
+import { useState,useReducer } from 'react';
+
+import { customAlphabet } from 'nanoid/non-secure'; 
+const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 10); 
 
 const ArrayInput=[
   {
@@ -14,10 +17,16 @@ const ArrayInput=[
   }
 ]
 
+  
 const RegistrationForm = ({onSubmit}) => {
-  const [login, setLogin] = useState('');
+  const [isFocused1,SetIsFocused1]=useState(false);
+  const [isFocused2,SetIsFocused2]=useState(false);
+  const [isFocused3,SetIsFocused3]=useState(false);
+  // const [state, dispatch] = useReducer(reducer, {isFocused1:false,isFocused2:false,isFocused3:false})
+ const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [secureText,setSecureText]=useState(true);
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -50,7 +59,7 @@ const handleSubmit = event => {
   setEmail('');
 };
  const passShow=event=>{
-  console.log(event.current.target);
+  setSecureText(!secureText?true:false);
  }
   return (
     <View style={styles.register_form}>
@@ -72,36 +81,39 @@ const handleSubmit = event => {
         ))}
       </ScrollView> */}
       <TextInput
+         key="1"
          type="text"
          name="login"
          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
          title="login"
          placeholder="Логін"
-         style={styles.input}
-         value={login}
-        onChangeText={setLogin}
+         onFocus={()=>{SetIsFocused1(true)}}
+         onBlur={()=>{SetIsFocused1(false)}}
+         style={isFocused1?[styles.input,styles.inputIsFocused]:[styles.input]}
+        //  {backgroundColor:this.state.backgroundColor??'#F6F6F6'}
       />
       <TextInput
-    type="email"
-    name="email"
-    pattern="([A-z0-9_.-]{1})@([A-z0-9_.-]{1}).([A-z]{28})"
-    title="email"
-    placeholder="Адреса електронної пошти"
-    style={styles.input}   
-    value={email}
-    onChangeText={setEmail}
+        type="email"
+        name="email"
+        pattern="([A-z0-9_.-]{1})@([A-z0-9_.-]{1}).([A-z]{28})"
+        title="email"
+        placeholder="Адреса електронної пошти"
+        onFocus={()=>{SetIsFocused2(true)}}
+          onBlur={()=>{SetIsFocused2(false)}}
+          style={isFocused2?[styles.input,styles.inputIsFocused]:[styles.input]}
     />
-      <View style={styles.input_pass_BG}>
-      
+      <View style={[styles.input_pass_BG]}>
       <TextInput
           type="password"
           name="password"
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7}"
           title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters"
           placeholder="Пароль"
-          secureTextEntry={true}
+          onFocus={()=>{SetIsFocused3(true)}}
+          onBlur={()=>{SetIsFocused3(false)}}
+          style={isFocused3?[styles.inputMailPass,styles.inputIsFocused]:[styles.inputMailPass]}
+          secureTextEntry={secureText}
           autocapitalize="off"
-          style={[styles.inputMailPass]}   
           value={password}
           onChangeText={setPassword}
       >        
@@ -109,7 +121,6 @@ const handleSubmit = event => {
       <TouchableOpacity
           style={styles.passShow}
           activeOpacity={0.5}
-          onPress={passShow}
         >
           <Text style={styles.passShowText}>Показати</Text>
         </TouchableOpacity>
@@ -117,7 +128,6 @@ const handleSubmit = event => {
         <TouchableOpacity
           style={styles.registerButton}
           activeOpacity={0.5}
-          onPress={handleSubmit}
         >
           <Text style={styles.registerButtonText}>Зареєструватися</Text>
         </TouchableOpacity>
@@ -141,6 +151,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
+    width:'100%'
   },
   h_text: {
     fontFamily: 'Roboto-500',
@@ -162,7 +173,6 @@ const styles = StyleSheet.create({
     borderColor: '#E8E8E8',
     borderRadius: 8,
     padding: 16,
-    width: 343,
   },
   input_pass_BG: {
     position: 'relative',
@@ -176,6 +186,13 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 16,
     position: 'relative',
+    backgroundColor: '#F6F6F6',
+    borderColor: '#E8E8E8',
+  },
+  inputIsFocused:{
+    borderColor:'#FF6C00',
+    borderWidth:1,
+    backgroundColor:"#FFFFFF",
   },
   passShowText: {
     fontStyle: 'normal',

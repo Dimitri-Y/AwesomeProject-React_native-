@@ -6,15 +6,15 @@ import { StyleSheet,
     Platform,
     View } from "react-native";
 
-const LoginScreen = ()=> {
+const LoginScreen = ({onSubmit})=> {
         return(
-            <ImageBackground source={require("../../assets/images/PhotoBG.png")} style={styles.image}>
+            <ImageBackground source={require("../../assets/images/PhotoBG.png")} resizeMethod="resize" style={styles.image}>
             <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             style={styles.containerKeyB}
           >
             <View style={styles.container}>
-            <LoginForm></LoginForm>
+            <LoginForm onSubmit={onSubmit}></LoginForm>
             {/* <Button style={styles.button}
             title={"Зареєструватися"}> 
             </Button> */}

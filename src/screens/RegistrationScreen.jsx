@@ -10,24 +10,24 @@ import { AntDesign } from '@expo/vector-icons';
 
 const buttonImg = require("../../assets/images/add.png");
 
-const RegistrationScreen=()=>{
+const RegistrationScreen=({onSubmit})=>{
         return(
-            <ImageBackground source={require("../../assets/images/PhotoBG.png")} style={styles.image}>
+            <ImageBackground source={require("../../assets/images/PhotoBG.png")} resizeMethod="resize" style={styles.image}>
             <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             style={styles.containerKeyB}
           >
            <View style={styles.container}>
            <View style={styles.photoContainer}>
-          <TouchableOpacity style={styles.addButton} activeOpacity={0.5}>
-            <AntDesign name="pluscircleo" size={24} color="#FF6C00" />
+              <TouchableOpacity style={styles.addButton} activeOpacity={0.5}>
+               <AntDesign name="pluscircleo" size={24} color="#FF6C00" />
             {/* <ImageBackground
               source={buttonImg}
               style={{ width: "100%", height: "100%" }}
             ></ImageBackground> */}
           </TouchableOpacity>
         </View>
-            <RegistrationForm></RegistrationForm>
+            <RegistrationForm onSubmit={onSubmit}></RegistrationForm>
             {/* <Button style={styles.button}
             title={"Зареєструватися"}> 
             </Button> */} 
@@ -55,12 +55,13 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fff',
     // borderTopRightRadius: 25,
     // borderTopLeftRadius: 25,
-    // width: '100%',
+    width: '100%',
   },
   image: {
     flex: 1,
     // flexDirection: 'column',
     justifyContent: 'flex-end',
+    width: '100%',
   },
   photoContainer: {
     marginLeft: 'auto',
