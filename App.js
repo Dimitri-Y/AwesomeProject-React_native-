@@ -23,9 +23,9 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        {/* <RegistrationScreen></RegistrationScreen> */}
+        <RegistrationScreen></RegistrationScreen>
         {/* <LoginScreen></LoginScreen> */}
-        <PostScreen></PostScreen>
+        {/* <PostScreen></PostScreen> */}
         <StatusBar style="auto" />
       </View>
     </TouchableWithoutFeedback>
