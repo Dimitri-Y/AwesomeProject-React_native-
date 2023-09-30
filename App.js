@@ -56,8 +56,8 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        {/* <RegistrationScreen onSubmit={onSubmitRegister}></RegistrationScreen> */}
-        <LoginScreen onSubmit={onSubmitLogin}></LoginScreen>
+        <RegistrationScreen onSubmit={onSubmitRegister}></RegistrationScreen>
+        {/* <LoginScreen onSubmit={onSubmitLogin}></LoginScreen> */}
         {/* <PostScreen></PostScreen> */}
         <StatusBar style="auto" />
       </View>

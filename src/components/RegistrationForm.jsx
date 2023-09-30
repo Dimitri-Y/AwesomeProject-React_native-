@@ -1,5 +1,4 @@
 import { Text, TextInput, View,ScrollView,TouchableOpacity,StyleSheet } from 'react-native';
-import  {nanoid}  from 'nanoid';
 import { useState,useReducer } from 'react';
 
 import { customAlphabet } from 'nanoid/non-secure'; 
@@ -121,6 +120,7 @@ const handleSubmit = event => {
       <TouchableOpacity
           style={styles.passShow}
           activeOpacity={0.5}
+          onPress={passShow}
         >
           <Text style={styles.passShowText}>Показати</Text>
         </TouchableOpacity>

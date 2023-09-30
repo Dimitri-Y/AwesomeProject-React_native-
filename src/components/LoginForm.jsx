@@ -85,7 +85,7 @@ const handleSubmit = event => {
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7}"
           title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters"
           placeholder="Пароль"
-          secureTextEntry={true}
+          secureTextEntry={secureText}
           autoCapitalize='none'
           onFocus={()=>{SetIsFocused2(true)}}
           onBlur={()=>{SetIsFocused2(false)}}
