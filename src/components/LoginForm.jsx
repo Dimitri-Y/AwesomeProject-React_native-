@@ -13,7 +13,6 @@ const ArrayInput=[
 const LoginForm = ({onSubmit}) => {
   const [isFocused1,SetIsFocused1]=useState(false);
   const [isFocused2,SetIsFocused2]=useState(false);
-  const [isFocused3,SetIsFocused3]=useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secureText,setSecureText]=useState(true);

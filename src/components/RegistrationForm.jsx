@@ -90,6 +90,8 @@ const handleSubmit = event => {
          onBlur={()=>{SetIsFocused1(false)}}
          style={isFocused1?[styles.input,styles.inputIsFocused]:[styles.input]}
         //  {backgroundColor:this.state.backgroundColor??'#F6F6F6'}
+          value={login}
+          onChangeText={setLogin}
       />
       <TextInput
         type="email"
@@ -100,6 +102,8 @@ const handleSubmit = event => {
         onFocus={()=>{SetIsFocused2(true)}}
           onBlur={()=>{SetIsFocused2(false)}}
           style={isFocused2?[styles.input,styles.inputIsFocused]:[styles.input]}
+          value={email}
+          onChangeText={setEmail}
     />
       <View style={[styles.input_pass_BG]}>
       <TextInput
