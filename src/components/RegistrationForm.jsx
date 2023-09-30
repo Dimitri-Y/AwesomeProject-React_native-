@@ -128,6 +128,7 @@ const handleSubmit = event => {
         <TouchableOpacity
           style={styles.registerButton}
           activeOpacity={0.5}
+          onPress={handleSubmit}
         >
           <Text style={styles.registerButtonText}>Зареєструватися</Text>
         </TouchableOpacity>
