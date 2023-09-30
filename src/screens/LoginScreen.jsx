@@ -8,7 +8,7 @@ import { StyleSheet,
 
 const LoginScreen = ()=> {
         return(
-            <ImageBackground source={require("../../assets/images/PhotoBG.png")} style={styles.image}>
+            <ImageBackground source={require("../../assets/images/PhotoBG.png")} resizeMethod="resize" style={styles.image}>
             <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             style={styles.containerKeyB}
