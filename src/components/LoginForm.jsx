@@ -1,5 +1,5 @@
 import { Text, TextInput, View,ScrollView,TouchableOpacity,StyleSheet } from 'react-native';
-import { useState } from 'react';
+import { useState,useReducer } from 'react';
 
 const ArrayInput=[
   {
@@ -10,40 +10,11 @@ const ArrayInput=[
   }
 ]
 
-const LoginForm = ({onSubmit}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-const handleChange = evt => {
-  const { name, value } = evt.target;
-  switch (name) {
-      case 'email':
-          setEmail(value);
-          break;
-    case 'password':
-      setPassword(value);
-          break;
-      default:
-      break;
-  }
-};
-
-const handleSubmit = event => {
-  const contactData = {
-    email:email,
-    password: password,
-    id: nanoid(),
-  };
-
-  onSubmit(contactData);
-  setPassword('');
-  setEmail('');
-};
-
-  const passShow=event=>{
-  console.log(event.current.target);
-  }
-
+const LoginForm = () => {
+  const [isFocused1,SetIsFocused1]=useState(false);
+  const [isFocused2,SetIsFocused2]=useState(false);
+  const [isFocused3,SetIsFocused3]=useState(false);
+    
   return (
     <View style={styles.login_form}>
       <Text style={styles.h_text}>Увійти</Text>    
@@ -69,9 +40,9 @@ const handleSubmit = event => {
     pattern="([A-z0-9_.-]{1})@([A-z0-9_.-]{1}).([A-z]{28})"
     title="email"
     placeholder="Адреса електронної пошти"
-    style={styles.input}
-    value={email}
-    onChangeText={setEmail}
+    onFocus={()=>{SetIsFocused1(true)}}
+    onBlur={()=>{SetIsFocused1(false)}}
+    style={isFocused1?[styles.input,styles.inputIsFocused]:[styles.input]}
     />
       <View style={styles.input_pass_BG}>      
       <TextInput
@@ -81,10 +52,10 @@ const handleSubmit = event => {
           title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters"
           placeholder="Пароль"
           secureTextEntry={true}
-          autocapitalize="off"
-          style={[styles.inputMailPass]}
-          value={password}
-          onChangeText={setPassword}
+          autoCapitalize='none'
+          onFocus={()=>{SetIsFocused2(true)}}
+          onBlur={()=>{SetIsFocused2(false)}}
+          style={isFocused2?[styles.inputMailPass,styles.inputIsFocused]:[styles.inputMailPass]}
       >        
       </TextInput>
       <TouchableOpacity
@@ -123,6 +94,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
+    width:'100%'
   },
   h_text: {
     fontFamily: 'Roboto-500',
@@ -144,7 +116,6 @@ const styles = StyleSheet.create({
     borderColor: '#E8E8E8',
     borderRadius: 8,
     padding: 16,
-    width: 343,
   },
   input_pass_BG: {
     position: 'relative',
@@ -158,6 +129,11 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 16,
     position: 'relative',
+  },
+  inputIsFocused:{
+    borderColor:'#FF6C00',
+    borderWidth:1,
+    backgroundColor:"#FFFFFF",
   },
   passShowText: {
     fontStyle: 'normal',
