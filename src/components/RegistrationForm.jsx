@@ -1,8 +1,6 @@
 import { Text, TextInput, View,ScrollView,TouchableOpacity,StyleSheet } from 'react-native';
+import  {nanoid}  from 'nanoid';
 import { useState,useReducer } from 'react';
-
-import { customAlphabet } from 'nanoid/non-secure'; 
-const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 10); 
 
 const ArrayInput=[
   {
@@ -16,50 +14,12 @@ const ArrayInput=[
   }
 ]
 
-  
-const RegistrationForm = ({onSubmit}) => {
+const RegistrationForm = () => {
   const [isFocused1,SetIsFocused1]=useState(false);
   const [isFocused2,SetIsFocused2]=useState(false);
   const [isFocused3,SetIsFocused3]=useState(false);
   // const [state, dispatch] = useReducer(reducer, {isFocused1:false,isFocused2:false,isFocused3:false})
- const [login, setLogin] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [secureText,setSecureText]=useState(true);
 
-  const handleChange = evt => {
-    const { name, value } = evt.target;
-  switch (name) {
-      case 'login':
-          setName(value);
-          break;
-      case 'email':
-          setEmail(value);
-          break;
-    case 'password':
-      setPassword(value);
-          break;
-      default:
-      break;
-  }
-};
-
-const handleSubmit = event => {
-  const contactData = {
-    email:email,
-    login: login,
-    password: password,
-    id: nanoid(),
-  };
-
-  onSubmit(contactData);
-  setLogin('');
-  setPassword('');
-  setEmail('');
-};
- const passShow=event=>{
-  setSecureText(!secureText?true:false);
- }
   return (
     <View style={styles.register_form}>
       <Text style={styles.h_text}>Реєстрація</Text>    
@@ -90,8 +50,6 @@ const handleSubmit = event => {
          onBlur={()=>{SetIsFocused1(false)}}
          style={isFocused1?[styles.input,styles.inputIsFocused]:[styles.input]}
         //  {backgroundColor:this.state.backgroundColor??'#F6F6F6'}
-          value={login}
-          onChangeText={setLogin}
       />
       <TextInput
         type="email"
@@ -102,8 +60,6 @@ const handleSubmit = event => {
         onFocus={()=>{SetIsFocused2(true)}}
           onBlur={()=>{SetIsFocused2(false)}}
           style={isFocused2?[styles.input,styles.inputIsFocused]:[styles.input]}
-          value={email}
-          onChangeText={setEmail}
     />
       <View style={[styles.input_pass_BG]}>
       <TextInput
@@ -112,19 +68,16 @@ const handleSubmit = event => {
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7}"
           title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters"
           placeholder="Пароль"
+          secureTextEntry={true}
+          autoCapitalize='none'
           onFocus={()=>{SetIsFocused3(true)}}
           onBlur={()=>{SetIsFocused3(false)}}
           style={isFocused3?[styles.inputMailPass,styles.inputIsFocused]:[styles.inputMailPass]}
-          secureTextEntry={secureText}
-          autocapitalize="off"
-          value={password}
-          onChangeText={setPassword}
       >        
       </TextInput>
       <TouchableOpacity
           style={styles.passShow}
           activeOpacity={0.5}
-          onPress={passShow}
         >
           <Text style={styles.passShowText}>Показати</Text>
         </TouchableOpacity>
@@ -132,7 +85,6 @@ const handleSubmit = event => {
         <TouchableOpacity
           style={styles.registerButton}
           activeOpacity={0.5}
-          onPress={handleSubmit}
         >
           <Text style={styles.registerButtonText}>Зареєструватися</Text>
         </TouchableOpacity>

@@ -6,7 +6,7 @@ import { StyleSheet,
     Platform,
     View } from "react-native";
 
-const LoginScreen = ({onSubmit})=> {
+const LoginScreen = ()=> {
         return(
             <ImageBackground source={require("../../assets/images/PhotoBG.png")} resizeMethod="resize" style={styles.image}>
             <KeyboardAvoidingView
@@ -14,7 +14,7 @@ const LoginScreen = ({onSubmit})=> {
             style={styles.containerKeyB}
           >
             <View style={styles.container}>
-            <LoginForm onSubmit={onSubmit}></LoginForm>
+            <LoginForm></LoginForm>
             {/* <Button style={styles.button}
             title={"Зареєструватися"}> 
             </Button> */}
