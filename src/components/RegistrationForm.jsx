@@ -112,11 +112,11 @@ const handleSubmit = event => {
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7}"
           title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters"
           placeholder="Пароль"
+          secureTextEntry={secureText}
+          autoCapitalize="none"
           onFocus={()=>{SetIsFocused3(true)}}
           onBlur={()=>{SetIsFocused3(false)}}
           style={isFocused3?[styles.inputMailPass,styles.inputIsFocused]:[styles.inputMailPass]}
-          secureTextEntry={secureText}
-          autocapitalize="off"
           value={password}
           onChangeText={setPassword}
       >        
