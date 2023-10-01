@@ -1,29 +1,44 @@
-import LoginForm from "../components/LoginForm";
-import { StyleSheet,
-    ImageBackground,
-    TouchableOpacity,
-    KeyboardAvoidingView,
-    Platform,
-    View } from "react-native";
+import Container from '../components/Container';
+import LoginForm from '../components/LoginForm';
+import {
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  View,
+} from 'react-native';
 
-const LoginScreen = ({onSubmit})=> {
-        return(
-            <ImageBackground source={require("../../assets/images/PhotoBG.png")} resizeMethod="resize" style={styles.image}>
-            <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-            style={styles.containerKeyB}
-          >
-            <View style={styles.container}>
-            <LoginForm onSubmit={onSubmit}></LoginForm>
+const LoginScreen = ({ onSubmit, navigation }) => {
+  const onSubmitLogin = contactData => {
+    const { email, password } = contactData;
+    console.log(`Login:${email},${password}`);
+  };
+  return (
+    <Container>
+      <ImageBackground
+        source={require('../../assets/images/PhotoBG.png')}
+        resizeMethod="resize"
+        style={styles.image}
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+          style={styles.containerKeyB}
+        >
+          <View style={styles.container}>
+            <LoginForm
+              onSubmit={onSubmitLogin}
+              navigation={navigation}
+            ></LoginForm>
             {/* <Button style={styles.button}
             title={"Зареєструватися"}> 
             </Button> */}
-           </View>
-            </KeyboardAvoidingView>
-            </ImageBackground>
-             
-    );
-}
+          </View>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </Container>
+  );
+};
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#FF6C00',
