@@ -10,7 +10,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 const buttonImg = require("../../assets/images/add.png");
 
-const RegistrationScreen=({onSubmit})=>{
+const RegistrationScreen=()=>{
         return(
             <ImageBackground source={require("../../assets/images/PhotoBG.png")} resizeMethod="resize" style={styles.image}>
             <KeyboardAvoidingView
@@ -27,7 +27,7 @@ const RegistrationScreen=({onSubmit})=>{
             ></ImageBackground> */}
           </TouchableOpacity>
         </View>
-            <RegistrationForm onSubmit={onSubmit}></RegistrationForm>
+            <RegistrationForm></RegistrationForm>
             {/* <Button style={styles.button}
             title={"Зареєструватися"}> 
             </Button> */} 
