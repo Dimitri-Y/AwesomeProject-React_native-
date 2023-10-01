@@ -9,12 +9,43 @@ const ArrayInput=[
     type:"password",name:"password",pattern:"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}",title:"Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters", placeholder:"Пароль",secureTextEntry:true,
   }
 ]
-
-const LoginForm = () => {
+ 
+const LoginForm = ({onSubmit}) => {
   const [isFocused1,SetIsFocused1]=useState(false);
   const [isFocused2,SetIsFocused2]=useState(false);
-  const [isFocused3,SetIsFocused3]=useState(false);
-    
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [secureText,setSecureText]=useState(true);
+
+  const handleChange = evt => {
+  const { name, value } = evt.target;
+  switch (name) {
+      case 'email':
+          setEmail(value);
+          break;
+    case 'password':
+      setPassword(value);
+          break;
+      default:
+      break;
+  }
+};
+
+const handleSubmit = event => {
+  const contactData = {
+    email:email,
+    password: password,
+  };
+
+  onSubmit(contactData);
+  setPassword('');
+  setEmail('');
+};
+
+  const passShow=event=>{
+    setSecureText(!secureText?true:false);
+  }
+
   return (
     <View style={styles.login_form}>
       <Text style={styles.h_text}>Увійти</Text>    
@@ -43,7 +74,9 @@ const LoginForm = () => {
     onFocus={()=>{SetIsFocused1(true)}}
     onBlur={()=>{SetIsFocused1(false)}}
     style={isFocused1?[styles.input,styles.inputIsFocused]:[styles.input]}
-    />
+    value={email}
+    onChangeText={setEmail}
+          />
       <View style={styles.input_pass_BG}>      
       <TextInput
           type="password"
@@ -51,16 +84,20 @@ const LoginForm = () => {
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7}"
           title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters"
           placeholder="Пароль"
-          secureTextEntry={true}
+          secureTextEntry={secureText}
           autoCapitalize='none'
           onFocus={()=>{SetIsFocused2(true)}}
           onBlur={()=>{SetIsFocused2(false)}}
           style={isFocused2?[styles.inputMailPass,styles.inputIsFocused]:[styles.inputMailPass]}
+          value={password}
+          onChangeText={setPassword}
       >        
       </TextInput>
       <TouchableOpacity
           style={styles.passShow}
           activeOpacity={0.5}
+          onPress={passShow}
+
         >
           <Text style={styles.passShowText}>Показати</Text>
         </TouchableOpacity>
@@ -68,6 +105,7 @@ const LoginForm = () => {
         <TouchableOpacity
           style={styles.loginButton}
           activeOpacity={0.5}
+          onPress={handleSubmit}
         >
           <Text style={styles.loginButtonText}>Увійти</Text>
         </TouchableOpacity>
