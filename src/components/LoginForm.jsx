@@ -123,7 +123,7 @@ const LoginForm = ({ onSubmit, navigation }) => {
           }
           value={password}
           onChangeText={setPassword}
-        />
+        ></TextInput>
         <TouchableOpacity
           style={styles.passShow}
           activeOpacity={0.5}
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
-    width: '100%',
+    // width: '100%',
   },
   h_text: {
     fontFamily: 'Roboto-500',

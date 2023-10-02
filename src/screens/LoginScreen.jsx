@@ -9,23 +9,26 @@ import {
   View,
 } from 'react-native';
 
-const LoginScreen = ({ onSubmit, navigation }) => {
+const LoginScreen = ({ onSubmit, navigation  }) => {
   const onSubmitLogin = contactData => {
     const { email, password } = contactData;
     console.log(`Login:${email},${password}`);
   };
   return (
-    <Container>
+    // <Container>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={-200}
+      style={styles.containerKeyB}
+      // enabled
+    >
       <ImageBackground
         source={require('../../assets/images/PhotoBG.png')}
         resizeMethod="resize"
         style={styles.image}
       >
-        <KeyboardAvoidingView
-          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-          style={styles.containerKeyB}
-        >
-          <View style={styles.container}>
+        <View style={styles.container_all}>
+        <View style={styles.container}>
             <LoginForm
               onSubmit={onSubmitLogin}
               navigation={navigation}
@@ -34,35 +37,33 @@ const LoginScreen = ({ onSubmit, navigation }) => {
             title={"Зареєструватися"}> 
             </Button> */}
           </View>
-        </KeyboardAvoidingView>
-      </ImageBackground>
-    </Container>
+          </View>
+          </ImageBackground>
+    {/* </Container> */}
+    </KeyboardAvoidingView>
   );
 };
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#FF6C00',
-    color: '#fff',
-  },
   container: {
     backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    width: '100%',
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
+    // justifyContent: 'flex-end',
   },
   containerKeyB: {
+    flex: 1,
+    width: '100%',
+    // justifyContent: 'flex-end',
+  },
+  container_all: {
+    flex: 1,
+    width: '100%',
     justifyContent: 'flex-end',
-    // backgroundColor: '#fff',
-    // borderTopRightRadius: 25,
-    // borderTopLeftRadius: 25,
-    // width: '100%',
   },
   image: {
     flex: 1,
-    // flexDirection: 'column',
-    justifyContent: 'flex-end',
     width: '100%',
+    // justifyContent: 'flex-end',
   },
 });
 export default LoginScreen;

@@ -10,78 +10,51 @@ import {
 } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
-const buttonExitImg = require('../../assets/images/logout.png');
-const buttonGridImg = require('../../assets/images/grid.png');
-const buttonAddPostImg = require('../../assets/images/Union.png');
-const buttonUserImg = require('../../assets/images/user.png');
-
-const PostScreen = ({ navigation }) => {
+const PostScreen = ({navigation}) => {
   return (
-    <Container>
-      <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        style={styles.containerKeyB}
-      >
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.h_text}>Публікація</Text>
-            <TouchableOpacity
-              style={styles.exitButton}
-              activeOpacity={0.5}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={-100}
+      style={styles.containerKeyB}
+      // enabled
+    >
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.h_text}>Публікація</Text>
+          <TouchableOpacity style={styles.exitButton} activeOpacity={0.5}
               onPress={() => navigation.navigate('Login')}
-            >
-              <Entypo name="log-out" size={24} color="black" />
-              {/* <ImageBackground
-              source={buttonExitImg}
-              style={{ width: "100%", height: "100%" }}
-              ></ImageBackground> */}
-            </TouchableOpacity>
-          </View>
-          <View style={styles.main}>
-            <TouchableOpacity activeOpacity={0.5}></TouchableOpacity>
-          </View>
-          <View style={styles.footer}>
-            <TouchableOpacity style={styles.gridButton} activeOpacity={0.5}>
-              <AntDesign name="appstore-o" size={24} color="black" />
-              {/* <ImageBackground
-              source={buttonGridImg}
-              style={{ width: "100%", height: "100%" }}
-              ></ImageBackground> */}
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.addPostButton}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate('CreatePosts')}
-            >
-              <AntDesign name="plus" size={13} color="white" />
-              {/* <ImageBackground
-                source={buttonAddPostImg}
-                style={{ width: 13, height: 13 }}
-                ></ImageBackground> */}
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.userButton} activeOpacity={0.5}>
-              <AntDesign name="user" size={24} color="black" />
-              {/* <ImageBackground
-              source={buttonUserImg}
-              style={{ width: "100%", height: "100%" }}
-              ></ImageBackground> */}
-            </TouchableOpacity>
-          </View>
+              >
+            <Entypo name="log-out" size={24} color="black" />
+          </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
-    </Container>
+        <View style={styles.main}>
+          <TouchableOpacity activeOpacity={0.5}></TouchableOpacity>
+        </View>
+        <View style={styles.footer}>
+          <TouchableOpacity style={styles.gridButton} activeOpacity={0.5}>
+            <AntDesign name="appstore-o" size={24} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.addPostButton} activeOpacity={0.5}>
+            <AntDesign name="plus" size={13} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.userButton} activeOpacity={0.5}>
+            <AntDesign name="user" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-    // alignItems: 'center',
     flex: 1,
     width: '100%',
   },
   containerKeyB: {
     justifyContent: 'flex-end',
+    backgroundColor: '#fff',
     width: '100%',
     flex: 1,
   },
