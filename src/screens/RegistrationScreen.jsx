@@ -1,67 +1,66 @@
-import RegistrationForm from "../components/RegistrationForm";
-import { StyleSheet,
-    Text,
-    ImageBackground,
-    View,
-    TouchableOpacity,
-    KeyboardAvoidingView,
-    Platform, } from "react-native";
-import { AntDesign } from '@expo/vector-icons'; 
+import RegistrationForm from '../components/RegistrationForm';
+import {
+  StyleSheet,
+  Text,
+  ImageBackground,
+  View,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
-const buttonImg = require("../../assets/images/add.png");
+const buttonImg = require('../../assets/images/add.png');
 
-const RegistrationScreen=({onSubmit})=>{
-        return(
-            <ImageBackground source={require("../../assets/images/PhotoBG.png")} resizeMethod="resize" style={styles.image}>
-            <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-            style={styles.containerKeyB}
-          >
-           <View style={styles.container}>
-           <View style={styles.photoContainer}>
+const RegistrationScreen = ({ onSubmit }) => {
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={-200}
+      style={styles.containerKeyB}
+      // enabled
+    >
+      <ImageBackground
+        source={require('../../assets/images/PhotoBG.png')}
+        resizeMethod="resize"
+        style={styles.image}
+      >
+        <View style={styles.container_all}>
+          <View style={styles.container}>
+            <View style={styles.photoContainer}>
               <TouchableOpacity style={styles.addButton} activeOpacity={0.5}>
-               <AntDesign name="pluscircleo" size={24} color="#FF6C00" />
-            {/* <ImageBackground
-              source={buttonImg}
-              style={{ width: "100%", height: "100%" }}
-            ></ImageBackground> */}
-          </TouchableOpacity>
-        </View>
-            <RegistrationForm onSubmit={onSubmit}></RegistrationForm>
-            {/* <Button style={styles.button}
-            title={"Зареєструватися"}> 
-            </Button> */} 
+                <AntDesign name="pluscircleo" size={24} color="#FF6C00" />
+              </TouchableOpacity>
             </View>
-            </KeyboardAvoidingView>
-            </ImageBackground>
-             
-    );
-}
+            <RegistrationForm onSubmit={onSubmit}></RegistrationForm>
+          </View>
+        </View>
+      </ImageBackground>
+    </KeyboardAvoidingView>
+  );
+};
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#FF6C00',
-    color: '#fff',
-  },
   container: {
     backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    width: '100%',
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
+    // justifyContent: 'flex-end',
   },
   containerKeyB: {
-    justifyContent: 'flex-end',
-    // backgroundColor: '#fff',
-    // borderTopRightRadius: 25,
-    // borderTopLeftRadius: 25,
+    flex: 1,
     width: '100%',
+    // justifyContent: 'flex-end',
+  },
+  container_all: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'flex-end',
   },
   image: {
     flex: 1,
-    // flexDirection: 'column',
-    justifyContent: 'flex-end',
     width: '100%',
+    // justifyContent: 'flex-end',
   },
   photoContainer: {
     marginLeft: 'auto',

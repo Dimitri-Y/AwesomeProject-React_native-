@@ -1,54 +1,71 @@
-import { Text, TextInput, View,ScrollView,TouchableOpacity,StyleSheet } from 'react-native';
-import { useState,useReducer } from 'react';
+import {
+  Text,
+  TextInput,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+import { useState, useReducer } from 'react';
 
-const ArrayInput=[
+const ArrayInput = [
   {
-    type:"email",name:"email",pattern:"([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})",title:"email",placeholder:"Адреса електронної пошти",
+    type: 'email',
+    name: 'email',
+    pattern: '([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})',
+    title: 'email',
+    placeholder: 'Адреса електронної пошти',
   },
   {
-    type:"password",name:"password",pattern:"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}",title:"Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters", placeholder:"Пароль",secureTextEntry:true,
-  }
-]
- 
-const LoginForm = ({onSubmit}) => {
-  const [isFocused1,SetIsFocused1]=useState(false);
-  const [isFocused2,SetIsFocused2]=useState(false);
+    type: 'password',
+    name: 'password',
+    pattern: '(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{7,}',
+    title:
+      'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters',
+    placeholder: 'Пароль',
+    secureTextEntry: true,
+  },
+];
+
+const LoginForm = ({ onSubmit }) => {
+  const [isFocused1, SetIsFocused1] = useState(false);
+  const [isFocused2, SetIsFocused2] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [secureText,setSecureText]=useState(true);
+  const [secureText, setSecureText] = useState(true);
 
   const handleChange = evt => {
-  const { name, value } = evt.target;
-  switch (name) {
+    const { name, value } = evt.target;
+    switch (name) {
       case 'email':
-          setEmail(value);
-          break;
-    case 'password':
-      setPassword(value);
-          break;
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
       default:
-      break;
-  }
-};
-
-const handleSubmit = event => {
-  const contactData = {
-    email:email,
-    password: password,
+        break;
+    }
   };
 
-  onSubmit(contactData);
-  setPassword('');
-  setEmail('');
-};
+  const handleSubmit = event => {
+    const contactData = {
+      email: email,
+      password: password,
+    };
 
-  const passShow=event=>{
-    setSecureText(!secureText?true:false);
-  }
+    onSubmit(contactData);
+    setPassword('');
+    setEmail('');
+  };
+
+  const passShow = event => {
+    setSecureText(!secureText ? true : false);
+  };
 
   return (
     <View style={styles.login_form}>
-      <Text style={styles.h_text}>Увійти</Text>    
+      <Text style={styles.h_text}>Увійти</Text>
       {/* <ScrollView style={styles.group}>
         {ArrayInput.map((input,index) => 
           (
@@ -66,42 +83,54 @@ const handleSubmit = event => {
         ))}
       </ScrollView> */}
       <TextInput
-    type="email"
-    name="email"
-    pattern="([A-z0-9_.-]{1})@([A-z0-9_.-]{1}).([A-z]{28})"
-    title="email"
-    placeholder="Адреса електронної пошти"
-    onFocus={()=>{SetIsFocused1(true)}}
-    onBlur={()=>{SetIsFocused1(false)}}
-    style={isFocused1?[styles.input,styles.inputIsFocused]:[styles.input]}
-    value={email}
-    onChangeText={setEmail}
-          />
-      <View style={styles.input_pass_BG}>      
-      <TextInput
+        type="email"
+        name="email"
+        pattern="([A-z0-9_.-]{1})@([A-z0-9_.-]{1}).([A-z]{28})"
+        title="email"
+        placeholder="Адреса електронної пошти"
+        onFocus={() => {
+          SetIsFocused1(true);
+        }}
+        onBlur={() => {
+          SetIsFocused1(false);
+        }}
+        style={
+          isFocused1 ? [styles.input, styles.inputIsFocused] : [styles.input]
+        }
+        value={email}
+        onChangeText={setEmail}
+      />
+      <View style={styles.input_pass_BG}>
+        <TextInput
           type="password"
           name="password"
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7}"
           title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters"
           placeholder="Пароль"
           secureTextEntry={secureText}
-          autoCapitalize='none'
-          onFocus={()=>{SetIsFocused2(true)}}
-          onBlur={()=>{SetIsFocused2(false)}}
-          style={isFocused2?[styles.inputMailPass,styles.inputIsFocused]:[styles.inputMailPass]}
+          autoCapitalize="none"
+          onFocus={() => {
+            SetIsFocused2(true);
+          }}
+          onBlur={() => {
+            SetIsFocused2(false);
+          }}
+          style={
+            isFocused2
+              ? [styles.inputMailPass, styles.inputIsFocused]
+              : [styles.inputMailPass]
+          }
           value={password}
           onChangeText={setPassword}
-      >        
-      </TextInput>
-      <TouchableOpacity
+        ></TextInput>
+        <TouchableOpacity
           style={styles.passShow}
           activeOpacity={0.5}
           onPress={passShow}
-
         >
           <Text style={styles.passShowText}>Показати</Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity
           style={styles.loginButton}
           activeOpacity={0.5}
@@ -110,12 +139,9 @@ const handleSubmit = event => {
           <Text style={styles.loginButtonText}>Увійти</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.registerLink}
-          activeOpacity={0.5}
-        >
+        <TouchableOpacity style={styles.registerLink} activeOpacity={0.5}>
           <Text style={styles.registerLinkText}>
-          Немає акаунту? Зареєструватися
+            Немає акаунту? Зареєструватися
           </Text>
         </TouchableOpacity>
       </View>
@@ -123,14 +149,13 @@ const handleSubmit = event => {
   );
 };
 
-
 const styles = StyleSheet.create({
   login_form: {
     backgroundColor: '#fff',
     padding: 16,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
-    width:'100%'
+    // width: '100%',
   },
   h_text: {
     fontFamily: 'Roboto-500',
@@ -166,10 +191,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     position: 'relative',
   },
-  inputIsFocused:{
-    borderColor:'#FF6C00',
-    borderWidth:1,
-    backgroundColor:"#FFFFFF",
+  inputIsFocused: {
+    borderColor: '#FF6C00',
+    borderWidth: 1,
+    backgroundColor: '#FFFFFF',
   },
   passShowText: {
     fontStyle: 'normal',

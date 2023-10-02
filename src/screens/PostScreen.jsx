@@ -1,93 +1,68 @@
-import { 
-    ImageBackground,
-    TouchableOpacity,
-    KeyboardAvoidingView,
-    Platform,
-    View, 
-    Text,StyleSheet } from "react-native";
-import { AntDesign,Entypo } from '@expo/vector-icons';
+import {
+  ImageBackground,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  View,
+  Text,
+  StyleSheet,
+} from 'react-native';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 
-const buttonExitImg = require("../../assets/images/logout.png");
-const buttonGridImg= require("../../assets/images/grid.png");
-const buttonAddPostImg= require("../../assets/images/Union.png");
-const buttonUserImg= require("../../assets/images/user.png");
-
-const PostScreen = ()=> {
-    return(
-        <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-        style={styles.containerKeyB}
-      >
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.h_text}>Публікація</Text>    
-            <TouchableOpacity style={styles.exitButton} activeOpacity={0.5}>
-              <Entypo name="log-out" size={24} color="black" />
-              {/* <ImageBackground
-              source={buttonExitImg}
-              style={{ width: "100%", height: "100%" }}
-              ></ImageBackground> */}
-             </TouchableOpacity>
-          </View>
-          <View style={styles.main}>
-          <TouchableOpacity activeOpacity={0.5}>
-          </TouchableOpacity>    
-          </View>
-          <View style={styles.footer}>
-            <TouchableOpacity style={styles.gridButton} activeOpacity={0.5}>
-                <AntDesign name="appstore-o" size={24} color="black" />
-              {/* <ImageBackground
-              source={buttonGridImg}
-              style={{ width: "100%", height: "100%" }}
-              ></ImageBackground> */}
-             </TouchableOpacity>
-             <TouchableOpacity style={styles.addPostButton} activeOpacity={0.5}>
-                <AntDesign name="plus" size={13} color="white" />
-                {/* <ImageBackground
-                source={buttonAddPostImg}
-                style={{ width: 13, height: 13 }}
-                ></ImageBackground> */}
-             </TouchableOpacity>
-             <TouchableOpacity style={styles.userButton} activeOpacity={0.5}>
-                <AntDesign name="user" size={24} color="black" />
-              {/* <ImageBackground
-              source={buttonUserImg}
-              style={{ width: "100%", height: "100%" }}
-              ></ImageBackground> */}
-             </TouchableOpacity>
-          </View>
+const PostScreen = () => {
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={-100}
+      style={styles.containerKeyB}
+      // enabled
+    >
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.h_text}>Публікація</Text>
+          <TouchableOpacity style={styles.exitButton} activeOpacity={0.5}>
+            <Entypo name="log-out" size={24} color="black" />
+          </TouchableOpacity>
         </View>
-        </KeyboardAvoidingView>  
-);
-}
+        <View style={styles.main}>
+          <TouchableOpacity activeOpacity={0.5}></TouchableOpacity>
+        </View>
+        <View style={styles.footer}>
+          <TouchableOpacity style={styles.gridButton} activeOpacity={0.5}>
+            <AntDesign name="appstore-o" size={24} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.addPostButton} activeOpacity={0.5}>
+            <AntDesign name="plus" size={13} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.userButton} activeOpacity={0.5}>
+            <AntDesign name="user" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-    // alignItems: 'center',
     flex: 1,
     width: '100%',
-    // position: 'relative',
   },
   containerKeyB: {
     justifyContent: 'flex-end',
     backgroundColor: '#fff',
-    // borderTopRightRadius: 25,
-    // borderTopLeftRadius: 25,
     width: '100%',
     flex: 1,
   },
   header: {
     // flex: 1,
-    // width: 500,
     padding: 16,
     borderBottomColor: '#0000004D',
     borderBottomWidth: 0.5,
     flexDirection: 'row',
     alignItems: 'center',
     alignContent: 'center',
-    // position: 'relative',
-    // box-shadow: 0px 0.5px 0px 0px #0000004D;
   },
   h_text: {
     fontFamily: 'Roboto-500',
@@ -110,7 +85,6 @@ const styles = StyleSheet.create({
   },
   footer: {
     // flex: 1,
-    // width: 500,
     padding: 16,
     borderTopColor: '#0000004D',
     borderTopWidth: 0.5,
@@ -118,8 +92,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 31,
-    // position: 'relative',
-    // box-shadow: 0px 0.5px 0px 0px #0000004D;
   },
   gridButton: {
     height: 25,
