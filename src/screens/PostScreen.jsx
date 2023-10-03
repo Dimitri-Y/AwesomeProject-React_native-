@@ -9,55 +9,54 @@ import {
   StyleSheet,
 } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Header from '../components/Header';
+
+const Tab = createBottomTabNavigator();
 
 const PostScreen = ({ navigation }) => {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={0}
-      style={styles.containerKeyB}
-      // enabled
-    >
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.h_text}>Публікація</Text>
-          <TouchableOpacity
-            style={styles.exitButton}
-            activeOpacity={0.5}
-            onPress={() => navigation.navigate('Login')}
-          >
-            <Entypo name="log-out" size={24} color="black" />
-          </TouchableOpacity>
+    <Container>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={0}
+        style={styles.containerKeyB}
+        // enabled
+      >
+        <View style={styles.container}>
+          <Header
+            title={'Публікації'}
+            option={'home'}
+            navigation={navigation}
+          />
+          <View style={styles.main}>
+            <TouchableOpacity activeOpacity={0.5}></TouchableOpacity>
+          </View>
+          {/* <View style={styles.footer}>
+            <TouchableOpacity style={styles.gridButton} activeOpacity={0.5}>
+              <AntDesign name="appstore-o" size={24} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.addPostButton}
+              activeOpacity={0.5}
+              onPress={() => navigation.navigate('CreatePosts')}
+            >
+              <AntDesign name="plus" size={13} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.userButton} activeOpacity={0.5}>
+              <AntDesign name="user" size={24} color="black" />
+            </TouchableOpacity>
+          </View> */}
         </View>
-        <View style={styles.main}>
-          <TouchableOpacity activeOpacity={0.5}></TouchableOpacity>
-        </View>
-        <View style={styles.footer}>
-          <TouchableOpacity style={styles.gridButton} activeOpacity={0.5}>
-            <AntDesign name="appstore-o" size={24} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.addPostButton}
-            activeOpacity={0.5}
-            onPress={() => navigation.navigate('CreatePosts')}
-          >
-            <AntDesign name="plus" size={13} color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.userButton} activeOpacity={0.5}>
-            <AntDesign name="user" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-    borderTopRightRadius: 25,
-    borderTopLeftRadius: 25,
-    // justifyContent: 'flex-end',
+    justifyContent: 'flex-end',
   },
   containerKeyB: {
     flex: 1,
@@ -91,6 +90,9 @@ const styles = StyleSheet.create({
   },
   main: {
     // flex: 6,
+    // height: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
   },
   footer: {
     // flex: 1,

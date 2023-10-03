@@ -11,26 +11,23 @@ import {
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useState, useReducer } from 'react';
 import CreatePostsForm from '../components/CreatePostsForm';
+import Header from '../components/Header';
+
 const CreatePostsScreen = ({ navigation }) => {
   return (
     <Container>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={100}
+        keyboardVerticalOffset={-100}
         style={styles.containerKeyB}
         // enabled
       >
         <View style={styles.container}>
-          <View style={styles.header}>
-            <TouchableOpacity
-              style={styles.exitButton}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate('Home')}
-            >
-              <AntDesign name="arrowleft" size={24} color="black" />
-            </TouchableOpacity>
-            <Text style={styles.h_text}>Створити публікацію</Text>
-          </View>
+          <Header
+            title={'Створити Публікацію'}
+            option={'createPosts'}
+            navigation={navigation}
+          />
           <View style={styles.main}>
             <TouchableOpacity activeOpacity={0.5}>
               <View style={styles.addPhoto_view}>
@@ -58,10 +55,8 @@ const CreatePostsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
-    borderTopRightRadius: 25,
-    borderTopLeftRadius: 25,
-    // justifyContent: 'flex-end',
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   containerKeyB: {
     flex: 1,
@@ -69,7 +64,6 @@ const styles = StyleSheet.create({
     // justifyContent: 'flex-end',
   },
   header: {
-    // flex: 1,
     padding: 16,
     borderBottomColor: '#0000004D',
     borderBottomWidth: 0.5,
@@ -94,7 +88,9 @@ const styles = StyleSheet.create({
     pointerEvents: 'auto',
   },
   main: {
+    flex: 1,
     padding: 16,
+    justifyContent: 'flex-end',
   },
   addPhoto_view: {
     height: 240,
@@ -121,8 +117,9 @@ const styles = StyleSheet.create({
     color: '#BDBDBD',
   },
   footer: {
+    // flex: 1,
     padding: 16,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
     gap: 31,
   },
