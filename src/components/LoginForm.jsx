@@ -61,7 +61,7 @@ const LoginForm = ({ onSubmit, navigation }) => {
   };
 
   const passShow = event => {
-    setSecureText(!secureText ? true : false);
+    setSecureText(!secureText ? false : true);
   };
 
   return (

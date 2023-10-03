@@ -10,10 +10,19 @@ import {
   Platform,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const buttonImg = require('../../assets/images/add.png');
 
 const RegistrationScreen = ({ onSubmit, navigation }) => {
+  const [contacts, setContacts] = useState(
+    [] // () => {return JSON.parse(AsyncStorage.getItem('constacts')) ?? [];}
+  );
+
+  // useEffect(() => {
+  //   AsyncStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
   const onSubmitRegister = contactData => {
     const { login, email, password } = contactData;
     const isDuplicateLogin = contacts.some(
@@ -33,33 +42,34 @@ const RegistrationScreen = ({ onSubmit, navigation }) => {
   };
 
   return (
-    // <Container>
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={-200}
-      style={styles.containerKeyB}
-      // enabled
-    >
-      <ImageBackground
-        source={require('../../assets/images/PhotoBG.png')}
-        resizeMethod="resize"
-        style={styles.image}
+    <Container>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={-200}
+        style={styles.containerKeyB}
+        // enabled
       >
-        <View style={styles.container_all}>
-          <View style={styles.container}>
-            <View style={styles.photoContainer}>
-              <TouchableOpacity style={styles.addButton} activeOpacity={0.5}>
-                <AntDesign name="pluscircleo" size={24} color="#FF6C00" />
-              </TouchableOpacity>
+        <ImageBackground
+          source={require('../../assets/images/PhotoBG.png')}
+          resizeMethod="resize"
+          style={styles.image}
+        >
+          <View style={styles.container_all}>
+            <View style={styles.container}>
+              <View style={styles.photoContainer}>
+                <TouchableOpacity style={styles.addButton} activeOpacity={0.5}>
+                  <AntDesign name="pluscircleo" size={24} color="#FF6C00" />
+                </TouchableOpacity>
+              </View>
+              <RegistrationForm
+                onSubmit={onSubmitRegister}
+                navigation={navigation}
+              ></RegistrationForm>
             </View>
-            <RegistrationForm   onSubmit={onSubmitRegister}
-              navigation={navigation}
-            ></RegistrationForm>
           </View>
-        </View>
-      </ImageBackground>
-    </KeyboardAvoidingView>
-    // </Container>
+        </ImageBackground>
+      </KeyboardAvoidingView>
+    </Container>
   );
 };
 

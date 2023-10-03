@@ -10,20 +10,22 @@ import {
 } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
-const PostScreen = ({navigation}) => {
+const PostScreen = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={-100}
+      keyboardVerticalOffset={0}
       style={styles.containerKeyB}
       // enabled
     >
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.h_text}>Публікація</Text>
-          <TouchableOpacity style={styles.exitButton} activeOpacity={0.5}
-              onPress={() => navigation.navigate('Login')}
-              >
+          <TouchableOpacity
+            style={styles.exitButton}
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate('Login')}
+          >
             <Entypo name="log-out" size={24} color="black" />
           </TouchableOpacity>
         </View>
@@ -34,7 +36,11 @@ const PostScreen = ({navigation}) => {
           <TouchableOpacity style={styles.gridButton} activeOpacity={0.5}>
             <AntDesign name="appstore-o" size={24} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.addPostButton} activeOpacity={0.5}>
+          <TouchableOpacity
+            style={styles.addPostButton}
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate('CreatePosts')}
+          >
             <AntDesign name="plus" size={13} color="white" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.userButton} activeOpacity={0.5}>
@@ -49,14 +55,14 @@ const PostScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-    flex: 1,
-    width: '100%',
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+    // justifyContent: 'flex-end',
   },
   containerKeyB: {
-    justifyContent: 'flex-end',
-    backgroundColor: '#fff',
-    width: '100%',
     flex: 1,
+    width: '100%',
+    // justifyContent: 'flex-end',
   },
   header: {
     // flex: 1,
@@ -84,15 +90,15 @@ const styles = StyleSheet.create({
     pointerEvents: 'auto',
   },
   main: {
-    flex: 6,
+    // flex: 6,
   },
   footer: {
     // flex: 1,
     padding: 16,
     borderTopColor: '#0000004D',
     borderTopWidth: 0.5,
-    justifyContent: 'center',
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
     gap: 31,
   },

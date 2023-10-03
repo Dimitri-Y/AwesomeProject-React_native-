@@ -79,7 +79,7 @@ const RegistrationForm = ({ onSubmit, navigation }) => {
     navigation.navigate('Home');
   };
   const passShow = event => {
-    setSecureText(!secureText ? true : false);
+    setSecureText(!secureText ? false : true);
   };
   return (
     <View style={styles.register_form}>

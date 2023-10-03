@@ -11,18 +11,14 @@ import {
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useState, useReducer } from 'react';
 import CreatePostsForm from '../components/CreatePostsForm';
-
-const buttonExitImg = require('../../assets/images/logout.png');
-const buttonGridImg = require('../../assets/images/grid.png');
-const buttonAddPostImg = require('../../assets/images/Union.png');
-const buttonUserImg = require('../../assets/images/user.png');
-
 const CreatePostsScreen = ({ navigation }) => {
   return (
     <Container>
       <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={100}
         style={styles.containerKeyB}
+        // enabled
       >
         <View style={styles.container}>
           <View style={styles.header}>
@@ -63,17 +59,17 @@ const CreatePostsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-    flex: 1,
-    width: '100%',
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+    // justifyContent: 'flex-end',
   },
   containerKeyB: {
-    justifyContent: 'flex-end',
-    // borderTopRightRadius: 25,
-    // borderTopLeftRadius: 25,
-    width: '100%',
     flex: 1,
+    width: '100%',
+    // justifyContent: 'flex-end',
   },
   header: {
+    // flex: 1,
     padding: 16,
     borderBottomColor: '#0000004D',
     borderBottomWidth: 0.5,

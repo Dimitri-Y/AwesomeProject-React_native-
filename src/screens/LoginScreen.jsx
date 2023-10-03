@@ -9,38 +9,35 @@ import {
   View,
 } from 'react-native';
 
-const LoginScreen = ({ onSubmit, navigation  }) => {
+const LoginScreen = ({ onSubmit, navigation }) => {
   const onSubmitLogin = contactData => {
     const { email, password } = contactData;
     console.log(`Login:${email},${password}`);
   };
   return (
-    // <Container>
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={-200}
-      style={styles.containerKeyB}
-      // enabled
-    >
-      <ImageBackground
-        source={require('../../assets/images/PhotoBG.png')}
-        resizeMethod="resize"
-        style={styles.image}
+    <Container>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={-200}
+        style={styles.containerKeyB}
+        // enabled
       >
-        <View style={styles.container_all}>
-        <View style={styles.container}>
-            <LoginForm
-              onSubmit={onSubmitLogin}
-              navigation={navigation}
-            ></LoginForm>
-            {/* <Button style={styles.button}
-            title={"Зареєструватися"}> 
-            </Button> */}
+        <ImageBackground
+          source={require('../../assets/images/PhotoBG.png')}
+          resizeMethod="resize"
+          style={styles.image}
+        >
+          <View style={styles.container_all}>
+            <View style={styles.container}>
+              <LoginForm
+                onSubmit={onSubmitLogin}
+                navigation={navigation}
+              ></LoginForm>
+            </View>
           </View>
-          </View>
-          </ImageBackground>
-    {/* </Container> */}
-    </KeyboardAvoidingView>
+        </ImageBackground>
+      </KeyboardAvoidingView>
+    </Container>
   );
 };
 const styles = StyleSheet.create({
