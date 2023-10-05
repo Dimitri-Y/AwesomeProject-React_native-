@@ -19,7 +19,7 @@ const Header = ({ option, title, navigation }) => {
       <TouchableOpacity
         style={styles.exitButton}
         activeOpacity={0.5}
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => navigation.navigate('Posts')}
       >
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>

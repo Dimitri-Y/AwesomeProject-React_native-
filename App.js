@@ -2,14 +2,8 @@ import 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 import RegistrationScreen from './src/screens/RegistrationScreen';
 import LoginScreen from './src/screens/LoginScreen';
-import PostScreen from './src/screens/PostScreen';
-import CreatePostsScreen from './src/screens/CreatePostsScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MyTabBar from './src/screens/Example';
-import { Button } from 'react-native';
-import Header from './src/components/Header';
 import Home from './src/screens/Home';
 
 const MainStack = createStackNavigator();
@@ -81,11 +75,6 @@ export default function App() {
           name="Home"
           component={Home}
           // options={{ headerShown: false }}
-          // options={options}
-        />
-        <MainStack.Screen
-          name="CreatePosts"
-          component={CreatePostsScreen}
           // options={options}
         />
       </MainStack.Navigator>
