@@ -1,51 +1,21 @@
 import Container from '../components/Container';
-import RegistrationForm from '../components/RegistrationForm';
 import {
   StyleSheet,
-  Text,
   ImageBackground,
-  View,
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  View,
+  Text,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 
-const buttonImg = require('../../assets/images/add.png');
-
-const RegistrationScreen = ({ onSubmit, navigation }) => {
-  const [contacts, setContacts] = useState(
-    [] // () => {return JSON.parse(AsyncStorage.getItem('constacts')) ?? [];}
-  );
-
-  // useEffect(() => {
-  //   AsyncStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-  const onSubmitRegister = contactData => {
-    const { login, email, password } = contactData;
-    const isDuplicateLogin = contacts.some(
-      contact => contact.login.toLowerCase() === login.toLowerCase()
-    );
-    if (isDuplicateLogin) {
-      return window.alert(` This name,${login}, is already in contacts!`);
-    }
-    const isDuplicateEmail = contacts.some(
-      contact => contact.email.toLowerCase() === email.toLowerCase()
-    );
-    if (isDuplicateEmail) {
-      return window.alert(` This email,${email}, is already in contacts!`);
-    }
-    setContacts([...contacts, contactData]);
-    console.log(`Register:${login} ${email},${password}`);
-  };
-
+const ProfileScreen = ({ navigation }) => {
   return (
     <Container>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={-200}
+        keyboardVerticalOffset={0}
         style={styles.containerKeyB}
         // enabled
       >
@@ -56,15 +26,20 @@ const RegistrationScreen = ({ onSubmit, navigation }) => {
         >
           <View style={styles.container_all}>
             <View style={styles.container}>
+              <TouchableOpacity
+                style={[styles.exitButton, styles.exitButton_home]}
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Login')}
+              >
+                <Entypo name="log-out" size={24} color="black" />
+              </TouchableOpacity>
               <View style={styles.photoContainer}>
                 <TouchableOpacity style={styles.addButton} activeOpacity={0.5}>
-                  <AntDesign name="pluscircleo" size={24} color="#FF6C00" />
+                  <AntDesign name="closecircleo" size={24} color="#E8E8E8" />
+                  {/* <AntDesign name="pluscircleo" size={24} color="#FF6C00" /> */}
                 </TouchableOpacity>
               </View>
-              <RegistrationForm
-                onSubmit={onSubmitRegister}
-                navigation={navigation}
-              ></RegistrationForm>
+              <Text style={styles.h_text}>Natali Romanova</Text>
             </View>
           </View>
         </ImageBackground>
@@ -72,13 +47,13 @@ const RegistrationScreen = ({ onSubmit, navigation }) => {
     </Container>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
     // justifyContent: 'flex-end',
+    position: 'relative',
   },
   containerKeyB: {
     flex: 1,
@@ -89,6 +64,18 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     justifyContent: 'flex-end',
+  },
+  exitButton: {
+    marginTop: 28,
+    height: 25,
+    width: 25,
+    pointerEvents: 'auto',
+  },
+  exitButton_home: {
+    position: 'absolute',
+    // marginLeft: 'auto',
+    top: -6,
+    right: 16,
   },
   image: {
     flex: 1,
@@ -112,6 +99,14 @@ const styles = StyleSheet.create({
     width: 25,
     pointerEvents: 'auto',
   },
+  h_text: {
+    fontFamily: 'Roboto-500',
+    fontSize: 30,
+    lineHeight: 35.16,
+    textAlign: 'center',
+    marginBottom: 1 ? 375 : 32,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 });
-
-export default RegistrationScreen;
+export default ProfileScreen;

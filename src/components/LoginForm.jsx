@@ -27,7 +27,7 @@ const ArrayInput = [
   },
 ];
 
-const LoginForm = ({ onSubmit }) => {
+const LoginForm = ({ onSubmit, navigation }) => {
   const [isFocused1, SetIsFocused1] = useState(false);
   const [isFocused2, SetIsFocused2] = useState(false);
   const [email, setEmail] = useState('');
@@ -57,10 +57,11 @@ const LoginForm = ({ onSubmit }) => {
     onSubmit(contactData);
     setPassword('');
     setEmail('');
+    navigation.navigate('Home');
   };
 
   const passShow = event => {
-    setSecureText(!secureText ? true : false);
+    setSecureText(!secureText ? false : true);
   };
 
   return (
@@ -139,7 +140,11 @@ const LoginForm = ({ onSubmit }) => {
           <Text style={styles.loginButtonText}>Увійти</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.registerLink} activeOpacity={0.5}>
+        <TouchableOpacity
+          style={styles.registerLink}
+          activeOpacity={0.5}
+          onPress={() => navigation.navigate('Registration')}
+        >
           <Text style={styles.registerLinkText}>
             Немає акаунту? Зареєструватися
           </Text>
