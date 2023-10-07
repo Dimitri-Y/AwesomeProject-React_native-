@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useState, useReducer } from 'react';
-import Header from '../components/Header';
+import { Header } from '../components/Header';
 
 const CommentsScreen = ({ navigation }) => {
   return (
@@ -22,11 +22,11 @@ const CommentsScreen = ({ navigation }) => {
         // enabled
       >
         <View style={styles.container}>
-          <Header
+          {/* <Header
             title={'Коментарі'}
             option={'comments'}
             navigation={navigation}
-          />
+          /> */}
           <View style={styles.main}></View>
           <View style={styles.footer}>
             <View style={styles.input_BG}>

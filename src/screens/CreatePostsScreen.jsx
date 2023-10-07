@@ -11,7 +11,7 @@ import {
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useState, useReducer } from 'react';
 import CreatePostsForm from '../components/CreatePostsForm';
-import Header from '../components/Header';
+import { Header } from '../components/Header';
 
 const CreatePostsScreen = ({ navigation }) => {
   return (
@@ -23,11 +23,11 @@ const CreatePostsScreen = ({ navigation }) => {
         // enabled
       >
         <View style={styles.container}>
-          <Header
+          {/* <Header
             title={'Створити Публікацію'}
             option={'createPosts'}
             navigation={navigation}
-          />
+          /> */}
           <View style={styles.main}>
             <TouchableOpacity activeOpacity={0.5}>
               <View style={styles.addPhoto_view}>

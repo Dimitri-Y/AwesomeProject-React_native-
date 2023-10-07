@@ -2,8 +2,8 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Entypo, AntDesign } from 'expo-vector-icons';
 import { StyleSheet } from 'react-native';
 
-const Header = ({ option, title, navigation }) => {
-  return option === 'home' ? (
+export const Header = ({ option, title, navigation }) => {
+  return option === 'posts' ? (
     <View style={styles.header}>
       <Text style={[styles.h_text, styles.h_text_home]}>{title}</Text>
       <TouchableOpacity
@@ -59,5 +59,3 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
   },
 });
-
-export default Header;

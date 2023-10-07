@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Header from '../components/Header';
+import { Header } from '../components/Header';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,29 +24,12 @@ const PostScreen = ({ navigation }) => {
         // enabled
       >
         <View style={styles.container}>
-          <Header
+          {/* <Header
             title={'Публікації'}
-            option={'home'}
+            option={'posts'}
             navigation={navigation}
-          />
-          <View style={styles.main}>
-            <TouchableOpacity activeOpacity={0.5}></TouchableOpacity>
-          </View>
-          {/* <View style={styles.footer}>
-            <TouchableOpacity style={styles.gridButton} activeOpacity={0.5}>
-              <AntDesign name="appstore-o" size={24} color="black" />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.addPostButton}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate('CreatePosts')}
-            >
-              <AntDesign name="plus" size={13} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.userButton} activeOpacity={0.5}>
-              <AntDesign name="user" size={24} color="black" />
-            </TouchableOpacity>
-          </View> */}
+          /> */}
+          <View style={styles.main}></View>
         </View>
       </KeyboardAvoidingView>
     </Container>
@@ -93,34 +76,6 @@ const styles = StyleSheet.create({
     // height: 'auto',
     marginTop: 'auto',
     marginBottom: 'auto',
-  },
-  footer: {
-    // flex: 1,
-    padding: 16,
-    borderTopColor: '#0000004D',
-    borderTopWidth: 0.5,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 31,
-  },
-  gridButton: {
-    height: 25,
-    width: 25,
-    pointerEvents: 'auto',
-  },
-  addPostButton: {
-    backgroundColor: '#FF6C00',
-    height: 40,
-    width: 70,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 100,
-  },
-  userButton: {
-    height: 25,
-    width: 25,
-    pointerEvents: 'auto',
   },
 });
 
