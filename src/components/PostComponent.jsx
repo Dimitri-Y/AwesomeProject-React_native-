@@ -30,39 +30,42 @@ const PostComponent = ({
   }
   return (
     <View style={styles.container}>
-      {imageURL && (
-        <ImageBackground
-          source={imageUrl}
-          resizeMethod="resize"
-          style={styles.image}
-        />
-      )}
-      <Text style={styles.h_text}>{title}</Text>
-      <View style={styles.bottom}>
-        <TouchableOpacity
-          style={styles.commentButton}
-          activeOpacity={0.5}
-          onPress={() =>
-            navigation.navigate('Comments', {
-              screen:
-                navigation.getState().routes[navigation.getState().index].name,
-            })
-          }
-        >
-          <FontAwesome5 name="comments" size={18} color="#BDBDBD" />
-          <Text style={styles.commentText}>{comments}</Text>
-        </TouchableOpacity>
-        {likes && (
-          <TouchableOpacity style={styles.likesButton} activeOpacity={0.5}>
-            <EvilIcons name="like" size={18} color="#FF6C00" />
-            <Text style={styles.likesText}>{likes}</Text>
-          </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.99}>
+        {imageURL && (
+          <ImageBackground
+            source={imageUrl}
+            resizeMethod="resize"
+            style={styles.image}
+          />
         )}
-        <TouchableOpacity style={styles.locationButton} activeOpacity={0.5}>
-          <AntDesign name="enviromento" size={18} color="#BDBDBD" />
-          <Text style={styles.locationText}>{location}</Text>
-        </TouchableOpacity>
-      </View>
+        <Text style={styles.h_text}>{title}</Text>
+        <View style={styles.bottom}>
+          <TouchableOpacity
+            style={styles.commentButton}
+            activeOpacity={0.5}
+            onPress={() =>
+              navigation.navigate('Comments', {
+                screen:
+                  navigation.getState().routes[navigation.getState().index]
+                    .name,
+              })
+            }
+          >
+            <FontAwesome5 name="comments" size={18} color="#BDBDBD" />
+            <Text style={styles.commentText}>{comments}</Text>
+          </TouchableOpacity>
+          {likes && (
+            <TouchableOpacity style={styles.likesButton} activeOpacity={0.5}>
+              <EvilIcons name="like" size={18} color="#FF6C00" />
+              <Text style={styles.likesText}>{likes}</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity style={styles.locationButton} activeOpacity={0.5}>
+            <AntDesign name="enviromento" size={18} color="#BDBDBD" />
+            <Text style={styles.locationText}>{location}</Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
