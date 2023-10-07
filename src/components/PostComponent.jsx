@@ -31,11 +31,13 @@ const PostComponent = ({
   return (
     <View style={styles.container}>
       {imageURL && (
-        <ImageBackground
-          source={imageUrl}
-          resizeMethod="resize"
-          style={styles.image}
-        />
+        <TouchableOpacity activeOpacity={0.99}>
+          <ImageBackground
+            source={imageUrl}
+            resizeMethod="resize"
+            style={styles.image}
+          />
+        </TouchableOpacity>
       )}
       <Text style={styles.h_text}>{title}</Text>
       <View style={styles.bottom}>
