@@ -1,18 +1,31 @@
 import Container from '../components/Container';
-import {
-  ImageBackground,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Platform,
-  View,
-  Text,
-  StyleSheet,
-} from 'react-native';
-import { AntDesign, Entypo } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { KeyboardAvoidingView, Platform, View, StyleSheet } from 'react-native';
 import { Header } from '../components/Header';
+import PostsList from '../components/PostsList';
 
-const Tab = createBottomTabNavigator();
+const catalog = [
+  {
+    imageURL: '../../assets/images/1.png',
+    title: 'Ліс',
+    comments: 8,
+    likes: 153,
+    location: 'Ukraine',
+  },
+  {
+    imageURL: '../../assets/images/2.png',
+    title: 'Захід на Чорному морі',
+    comments: 3,
+    likes: 200,
+    location: 'Ukraine',
+  },
+  {
+    imageURL: '../../assets/images/3.png',
+    title: 'Старий будиночок у Венеції',
+    comments: 50,
+    likes: 200,
+    location: 'Italy',
+  },
+];
 
 const PostScreen = ({ navigation }) => {
   return (
@@ -29,7 +42,13 @@ const PostScreen = ({ navigation }) => {
             option={'posts'}
             navigation={navigation}
           /> */}
-          <View style={styles.main}></View>
+          <View style={styles.main}>
+            <PostsList
+              catalog={catalog}
+              navigation={navigation}
+              option={'posts'}
+            />
+          </View>
         </View>
       </KeyboardAvoidingView>
     </Container>
@@ -40,41 +59,18 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
     justifyContent: 'flex-end',
+    flex: 1,
   },
   containerKeyB: {
     flex: 1,
     width: '100%',
     // justifyContent: 'flex-end',
   },
-  header: {
-    // flex: 1,
-    padding: 16,
-    borderBottomColor: '#0000004D',
-    borderBottomWidth: 0.5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'center',
-  },
-  h_text: {
-    fontFamily: 'Roboto-500',
-    fontSize: 17,
-    lineHeight: 22,
-    textAlign: 'center',
-    marginTop: 28,
-    marginLeft: 'auto',
-  },
-  exitButton: {
-    marginLeft: 'auto',
-    marginTop: 28,
-    // right: 16,
-    height: 25,
-    width: 25,
-    pointerEvents: 'auto',
-  },
   main: {
-    // flex: 6,
+    flex: 1,
     // height: 'auto',
-    marginTop: 'auto',
+    marginTop: 32,
+    // marginTop: 'auto',
     marginBottom: 'auto',
   },
 });

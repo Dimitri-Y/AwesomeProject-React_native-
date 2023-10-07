@@ -17,7 +17,7 @@ const CommentsScreen = ({ navigation }) => {
     <Container>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={0}
+        keyboardVerticalOffset={-200}
         style={styles.containerKeyB}
         // enabled
       >

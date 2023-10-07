@@ -13,8 +13,6 @@ import { AntDesign } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const buttonImg = require('../../assets/images/add.png');
-
 const RegistrationScreen = ({ onSubmit, navigation }) => {
   const [contacts, setContacts] = useState(
     [] // () => {return JSON.parse(AsyncStorage.getItem('constacts')) ?? [];}

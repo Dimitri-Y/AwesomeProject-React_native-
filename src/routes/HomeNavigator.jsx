@@ -16,12 +16,11 @@ export default function Home() {
       // }}
       tabBar={props => <MyTabBar {...props} />}
     >
-      {/* <Tab.Screen name="Comments" component={CommentsScreen} /> */}
       <Tab.Screen
         name="Posts"
         component={PostScreen}
         options={{
-          headerTransparent: true,
+          headerTransparent: false,
           header: ({ navigation }) => (
             <Header navigation={navigation} option="posts" title="Публікації" />
           ),
@@ -31,7 +30,7 @@ export default function Home() {
         name="CreatePosts"
         component={CreatePostsScreen}
         options={{
-          headerTransparent: true,
+          headerTransparent: false,
           header: ({ navigation }) => (
             <Header
               navigation={navigation}
@@ -46,7 +45,28 @@ export default function Home() {
         component={ProfileScreen}
         options={{
           // headerTransparent: true,
+          // headerTitle: '',
+          // headerStyle: {
+          //   // back: undefined,
+          //   height: 150,
+          //   backgroundColor: 'transparent',
+          // },
           headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Comments"
+        component={CommentsScreen}
+        options={{
+          headerTransparent: false,
+          header: ({ navigation }) => (
+            <Header
+              navigation={navigation}
+              option="comments"
+              title="Коментарі"
+            />
+          ),
+          // state: state,
         }}
       />
     </Tab.Navigator>

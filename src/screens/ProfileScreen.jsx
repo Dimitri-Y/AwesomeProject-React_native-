@@ -9,6 +9,31 @@ import {
   Text,
 } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
+import PostsList from '../components/PostsList';
+
+const catalog = [
+  {
+    imageURL: '../../assets/images/1.png',
+    title: 'Ліс',
+    comments: 8,
+    likes: 153,
+    location: 'Ukraine',
+  },
+  {
+    imageURL: '../../assets/images/2.png',
+    title: 'Захід на Чорному морі',
+    comments: 3,
+    likes: 200,
+    location: 'Ukraine',
+  },
+  {
+    imageURL: '../../assets/images/3.png',
+    title: 'Старий будиночок у Венеції',
+    comments: 50,
+    likes: 200,
+    location: 'Italy',
+  },
+];
 
 const ProfileScreen = ({ navigation }) => {
   return (
@@ -24,23 +49,27 @@ const ProfileScreen = ({ navigation }) => {
           resizeMethod="resize"
           style={styles.image}
         >
+          <View style={styles.container}></View>
           <View style={styles.container_all}>
-            <View style={styles.container}>
-              <TouchableOpacity
-                style={[styles.exitButton, styles.exitButton_home]}
-                activeOpacity={0.5}
-                onPress={() => navigation.navigate('Login')}
-              >
-                <Entypo name="log-out" size={24} color="black" />
+            <TouchableOpacity
+              style={[styles.exitButton, styles.exitButton_home]}
+              activeOpacity={0.5}
+              onPress={() => navigation.navigate('Login')}
+            >
+              <Entypo name="log-out" size={24} color="black" />
+            </TouchableOpacity>
+            <View style={styles.photoContainer}>
+              <TouchableOpacity style={styles.addButton} activeOpacity={0.5}>
+                <AntDesign name="closecircleo" size={24} color="#E8E8E8" />
+                {/* <AntDesign name="pluscircleo" size={24} color="#FF6C00" /> */}
               </TouchableOpacity>
-              <View style={styles.photoContainer}>
-                <TouchableOpacity style={styles.addButton} activeOpacity={0.5}>
-                  <AntDesign name="closecircleo" size={24} color="#E8E8E8" />
-                  {/* <AntDesign name="pluscircleo" size={24} color="#FF6C00" /> */}
-                </TouchableOpacity>
-              </View>
-              <Text style={styles.h_text}>Natali Romanova</Text>
             </View>
+            <Text style={styles.h_text}>Natali Romanova</Text>
+            <PostsList
+              catalog={catalog}
+              navigation={navigation}
+              option={'profile'}
+            />
           </View>
         </ImageBackground>
       </KeyboardAvoidingView>
@@ -49,11 +78,8 @@ const ProfileScreen = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
-    borderTopRightRadius: 25,
-    borderTopLeftRadius: 25,
-    // justifyContent: 'flex-end',
-    position: 'relative',
+    // height: 150,
+    flex: 1,
   },
   containerKeyB: {
     flex: 1,
@@ -61,9 +87,14 @@ const styles = StyleSheet.create({
     // justifyContent: 'flex-end',
   },
   container_all: {
-    flex: 1,
+    flex: 4,
     width: '100%',
-    justifyContent: 'flex-end',
+    backgroundColor: '#FFFFFF',
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+    // justifyContent: 'flex-end',
+    position: 'relative',
+    // justifyContent: 'flex-end',
   },
   exitButton: {
     marginTop: 28,
@@ -83,6 +114,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'flex-end',
   },
   photoContainer: {
+    // flex: 1,
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: -60,
@@ -104,7 +136,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 35.16,
     textAlign: 'center',
-    marginBottom: 1 ? 375 : 32,
+    marginBottom: 32,
     marginLeft: 'auto',
     marginRight: 'auto',
   },

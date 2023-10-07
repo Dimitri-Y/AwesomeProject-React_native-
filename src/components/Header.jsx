@@ -1,8 +1,15 @@
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Entypo, AntDesign } from 'expo-vector-icons';
 import { StyleSheet } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export const Header = ({ option, title, navigation }) => {
+export const Header = ({ option, title }) => {
+  const navigation = useNavigation();
+  const state = navigation.getState();
+  // const {
+  //   params: { history },
+  // } = useRoute();state.history[state.history.length - 2]
+  // history && console.log(history);
   return option === 'posts' ? (
     <View style={styles.header}>
       <Text style={[styles.h_text, styles.h_text_home]}>{title}</Text>
