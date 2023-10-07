@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   container: {
     // padding: 16,
     flex: 1,
+    marginBottom: 32,
   },
   image: {
     flex: 1,
