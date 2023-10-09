@@ -64,13 +64,10 @@ const styles = StyleSheet.create({
   containerKeyB: {
     flex: 1,
     width: '100%',
-    // justifyContent: 'flex-end',
   },
   main: {
     flex: 1,
-    // height: 'auto',
     marginTop: 32,
-    // marginTop: 'auto',
     marginBottom: 'auto',
   },
 });

@@ -20,8 +20,10 @@ const CreatePostsScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [isDisabledText, setIsDisabledText] = useState(false);
   const [uriPhoto, setUriPhoto] = useState('');
+  const [name, setName] = useState('');
+  const [location, setLocation] = useState('');
+  const [isDelete, setIsDelete] = useState(false);
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -30,6 +32,9 @@ const CreatePostsScreen = ({ navigation }) => {
       setHasPermission(status === 'granted');
     })();
   }, []);
+  useEffect(() => {
+    setIsDelete(true);
+  }, [uriPhoto, name, location]);
 
   if (hasPermission === null) {
     return <View />;
@@ -51,11 +56,6 @@ const CreatePostsScreen = ({ navigation }) => {
         // enabled
       >
         <View style={styles.container}>
-          {/* <Header
-            title={'Створити Публікацію'}
-            option={'createPosts'}
-            navigation={navigation}
-          /> */}
           <View style={styles.main}>
             <View style={styles.addPhoto_view}>
               {uriPhoto === '' ? (
@@ -65,11 +65,10 @@ const CreatePostsScreen = ({ navigation }) => {
                       activeOpacity={0.5}
                       style={[
                         styles.addPhoto_button,
-                        isDisabledText && { display: 'none' },
+                        uriPhoto !== '' && { display: 'none' },
                       ]}
                       onPress={async () => {
                         if (cameraRef) {
-                          setIsDisabledText(true);
                           toggleCameraType();
                           const { uri } = await cameraRef.takePictureAsync();
                           setUriPhoto(uri);
@@ -90,14 +89,30 @@ const CreatePostsScreen = ({ navigation }) => {
             </View>
             <TouchableOpacity activeOpacity={0.5}>
               <Text style={styles.addPhoto_text}>
-                {isDisabledText ? 'Редагувати фото' : 'Завантажте фото'}
+                {uriPhoto !== '' ? 'Редагувати фото' : 'Завантажте фото'}
               </Text>
             </TouchableOpacity>
-            <CreatePostsForm navigation={navigation}></CreatePostsForm>
+            <CreatePostsForm
+              navigation={navigation}
+              name={name}
+              setLocation={setLocation}
+              setName={setName}
+              location={location}
+            ></CreatePostsForm>
           </View>
           <View style={styles.footer}>
-            <TouchableOpacity style={styles.deleteButton} activeOpacity={0.5}>
-              <AntDesign name="delete" size={24} color="#BDBDBD" />
+            <TouchableOpacity
+              onPress={() => {
+                if (isDelete) {
+                  setUriPhoto('');
+                  setName('');
+                  setLocation('');
+                }
+              }}
+              style={styles.deleteButton}
+              activeOpacity={0.5}
+            >
+              <AntDesign name="delete" size={24} color={'#BDBDBD'} />
             </TouchableOpacity>
           </View>
         </View>
@@ -114,7 +129,6 @@ const styles = StyleSheet.create({
   containerKeyB: {
     flex: 1,
     width: '100%',
-    // justifyContent: 'flex-end',
   },
   main: {
     flex: 1,
@@ -160,7 +174,12 @@ const styles = StyleSheet.create({
   deleteButton: {
     height: 25,
     width: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
     pointerEvents: 'auto',
+  },
+  deleteButtonFocused: {
+    backgroundColor: '#FF6C00',
   },
 });
 

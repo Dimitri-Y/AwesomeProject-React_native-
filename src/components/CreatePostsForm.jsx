@@ -10,11 +10,15 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 
-const CreatePostsForm = ({ navigation }) => {
+const CreatePostsForm = ({
+  navigation,
+  location,
+  setLocation,
+  name,
+  setName,
+}) => {
   const [isFocused1, SetIsFocused1] = useState(false);
   const [isFocused2, SetIsFocused2] = useState(false);
-  const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
   const [isPublishedButton, setIsPublishedButton] = useState(false);
 
   useEffect(() => {
