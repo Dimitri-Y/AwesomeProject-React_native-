@@ -4,60 +4,64 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 const MyTabBar = ({ state, descriptors, navigation }) => {
   // navigation.  .routes[state.index].routeName state.routes[state.index].name !== 'CreatePosts'||
   return (
-    !['CreatePosts', 'Comments'].includes(state.routes[state.index].name) && (
+    !['CreatePosts', 'Comments', 'Map'].includes(
+      state.routes[state.index].name
+    ) && (
       <View>
         <View style={styles.footer}>
-          {state.routes[state.index].name === 'Posts' ? (
-            <TouchableOpacity
-              style={styles.headButton}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate('Posts')}
-            >
-              <AntDesign name="appstore-o" size={24} color="white" />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              style={styles.sideButton}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate('Posts')}
-            >
-              <AntDesign name="appstore-o" size={24} color="black" />
-            </TouchableOpacity>
-          )}
-          {state.routes[state.index].name === 'CreatePosts' ? (
-            <TouchableOpacity
-              style={styles.headButton}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate('CreatePosts')}
-            >
-              <AntDesign name="plus" size={13} color="white" />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              style={styles.sideButton}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate('CreatePosts')}
-            >
-              <AntDesign name="plus" size={13} color="black" />
-            </TouchableOpacity>
-          )}
-          {state.routes[state.index].name === 'Profile' ? (
-            <TouchableOpacity
-              style={styles.headButton}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate('Profile')}
-            >
-              <AntDesign name="user" size={24} color="white" />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              style={styles.sideButton}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate('Profile')}
-            >
-              <AntDesign name="user" size={24} color="black" />
-            </TouchableOpacity>
-          )}
+          <View style={styles.footer_content}>
+            {state.routes[state.index].name === 'Posts' ? (
+              <TouchableOpacity
+                style={styles.headButton}
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Posts')}
+              >
+                <AntDesign name="appstore-o" size={24} color="white" />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.sideButton}
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Posts')}
+              >
+                <AntDesign name="appstore-o" size={24} color="black" />
+              </TouchableOpacity>
+            )}
+            {state.routes[state.index].name === 'CreatePosts' ? (
+              <TouchableOpacity
+                style={[styles.headButton, styles.innerButton]}
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('CreatePosts')}
+              >
+                <AntDesign name="plus" size={13} color="white" />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={[styles.sideButton, styles.innerButton]}
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('CreatePosts')}
+              >
+                <AntDesign name="plus" size={13} color="black" />
+              </TouchableOpacity>
+            )}
+            {state.routes[state.index].name === 'Profile' ? (
+              <TouchableOpacity
+                style={styles.headButton}
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Profile')}
+              >
+                <AntDesign name="user" size={24} color="white" />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.sideButton}
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Profile')}
+              >
+                <AntDesign name="user" size={24} color="black" />
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
       </View>
     )
@@ -70,14 +74,23 @@ const styles = StyleSheet.create({
     padding: 16,
     borderTopColor: '#0000004D',
     borderTopWidth: 0.5,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+  },
+  footer_content: {
     flexDirection: 'row',
+    alignContent: 'center',
     justifyContent: 'center',
     alignItems: 'center',
     gap: 31,
   },
+  innerButton: {
+    // marginLeft: '0',
+    // marginRight: '0',
+  },
   sideButton: {
     height: 40,
-    width: 40,
+    width: 70,
     justifyContent: 'center',
     alignItems: 'center',
     pointerEvents: 'auto',

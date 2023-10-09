@@ -5,6 +5,7 @@ import CommentsScreen from '../screens/CommentsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { Header } from '../components/Header';
 import MyTabBar from '../components/MyTabNavigator';
+import MapScreen from '../screens/MapScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,6 +39,14 @@ export default function Home() {
               title="Створити Публікацію"
             />
           ),
+        }}
+      />
+      <Tab.Screen
+        name="Map"
+        component={MapScreen}
+        options={{
+          // headerTransparent: false,
+          headerShown: false,
         }}
       />
       <Tab.Screen

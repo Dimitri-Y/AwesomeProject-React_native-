@@ -5,15 +5,35 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
-
-import { useState, useReducer } from 'react';
+import { useState, useEffect, useReducer, useRef } from 'react';
 import { AntDesign, Entypo } from '@expo/vector-icons';
+import { Camera } from 'expo-camera';
+import * as MediaLibrary from 'expo-media-library';
 
-const CreatePostsForm = () => {
+const CreatePostsForm = ({ navigation }) => {
   const [isFocused1, SetIsFocused1] = useState(false);
   const [isFocused2, SetIsFocused2] = useState(false);
-  const [isPublishedButton, SetIsPublishedButton] = useState(false);
+  const [name, setName] = useState('');
+  const [location, setLocation] = useState('');
+  const [isPublishedButton, setIsPublishedButton] = useState(false);
 
+  useEffect(() => {
+    const ChangeLocation = () => {
+      if (location !== '' && name !== '') {
+        setIsPublishedButton(true);
+      } else {
+        setIsPublishedButton(false);
+      }
+    };
+    ChangeLocation();
+  }, [location, name]);
+
+  const handleSubmit = () => {
+    if (isPublishedButton) {
+      console.log('Submit');
+      navigation.navigate('Map', { locationName: location, name: name });
+    }
+  };
   return (
     <View>
       <View style={styles.input_BG}>
@@ -29,12 +49,14 @@ const CreatePostsForm = () => {
           // onBlur={() => {
           //   SetIsFocused2(false);
           // }}
+          value={name}
+          onChangeText={setName}
           style={
             isFocused1 ? [styles.input, styles.inputIsFocused] : [styles.input]
           }
         />
         <View style={styles.input_location_BG}>
-          <TouchableOpacity style={styles.locationButton} activeOpacity={0.5}>
+          <TouchableOpacity style={styles.locationButton} activeOpacity={0.1}>
             <AntDesign name="enviromento" size={24} color="#BDBDBD" />
           </TouchableOpacity>
           <TextInput
@@ -49,6 +71,8 @@ const CreatePostsForm = () => {
             // onBlur={() => {
             //   SetIsFocused2(false);
             // }}
+            value={location}
+            onChangeText={setLocation}
             style={
               isFocused2
                 ? [styles.input, styles.input_location, styles.inputIsFocused]
@@ -64,6 +88,8 @@ const CreatePostsForm = () => {
             : [styles.publishLink, styles.publishLinkFocused]
         }
         activeOpacity={0.5}
+        disabled={!isPublishedButton}
+        onPress={handleSubmit}
       >
         <Text
           style={
