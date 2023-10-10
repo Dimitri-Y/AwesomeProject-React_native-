@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  ImageBackground,
-  TouchableOpacity,
-  View,
-  Text,
-} from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, View, Text } from 'react-native';
 import { AntDesign, FontAwesome5, EvilIcons } from '@expo/vector-icons';
 
 const PostComponent = ({
@@ -12,7 +6,8 @@ const PostComponent = ({
   title,
   comments,
   likes,
-  location,
+  locationName,
+  locationURL,
   navigation,
 }) => {
   let imageUrl;
@@ -22,21 +17,19 @@ const PostComponent = ({
       break;
     case '../../assets/images/2.png':
       imageUrl = require('../../assets/images/2.png');
+      break;
     case '../../assets/images/3.png':
       imageUrl = require('../../assets/images/3.png');
       break;
     default:
+      imageUrl = { uri: imageURL };
       break;
   }
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.99}>
         {imageURL && (
-          <ImageBackground
-            source={imageUrl}
-            resizeMethod="resize"
-            style={styles.image}
-          />
+          <Image source={imageUrl} resizeMethod="resize" style={styles.image} />
         )}
         <Text style={styles.h_text}>{title}</Text>
         <View style={styles.bottom}>
@@ -60,9 +53,18 @@ const PostComponent = ({
               <Text style={styles.likesText}>{likes}</Text>
             </TouchableOpacity>
           )}
-          <TouchableOpacity style={styles.locationButton} activeOpacity={0.5}>
+          <TouchableOpacity
+            style={styles.locationButton}
+            activeOpacity={0.5}
+            onPress={() => {
+              navigation.navigate('Map', {
+                locationName: locationName,
+                locationURL: locationURL,
+              });
+            }}
+          >
             <AntDesign name="enviromento" size={18} color="#BDBDBD" />
-            <Text style={styles.locationText}>{location}</Text>
+            <Text style={styles.locationText}>{locationName}</Text>
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
@@ -77,8 +79,9 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    width: '100%',
     height: 240,
-    borderRadius: 25,
+    borderRadius: 8,
     // justifyContent: 'flex-end',
     marginBottom: 8,
   },

@@ -2,6 +2,7 @@ import Container from '../components/Container';
 import { KeyboardAvoidingView, Platform, View, StyleSheet } from 'react-native';
 import { Header } from '../components/Header';
 import PostsList from '../components/PostsList';
+import { useRoute } from '@react-navigation/native';
 
 const catalog = [
   {
@@ -9,25 +10,37 @@ const catalog = [
     title: 'Ліс',
     comments: 8,
     likes: 153,
-    location: 'Ukraine',
+    location: {
+      locationName: 'Ukraine',
+      locationURL: { latitude: 48.66062, longitude: 23.086478 },
+    },
   },
   {
     imageURL: '../../assets/images/2.png',
     title: 'Захід на Чорному морі',
     comments: 3,
     likes: 200,
-    location: 'Ukraine',
+    location: {
+      locationName: 'Ukraine',
+      locationURL: { latitude: 46.512609, longitude: 30.740698 },
+    },
   },
   {
     imageURL: '../../assets/images/3.png',
     title: 'Старий будиночок у Венеції',
     comments: 50,
     likes: 200,
-    location: 'Italy',
+    location: {
+      locationName: 'Italy',
+      locationURL: { latitude: 41.910354, longitude: 12.453003 },
+    },
   },
 ];
 
 const PostScreen = ({ navigation }) => {
+  const route = useRoute();
+  // let { imageURL, title, comments, likes, location } = route.params;
+
   return (
     <Container>
       <KeyboardAvoidingView
@@ -37,14 +50,23 @@ const PostScreen = ({ navigation }) => {
         // enabled
       >
         <View style={styles.container}>
-          {/* <Header
-            title={'Публікації'}
-            option={'posts'}
-            navigation={navigation}
-          /> */}
           <View style={styles.main}>
             <PostsList
-              catalog={catalog}
+              catalog={
+                route.params
+                  ? [
+                      ...catalog,
+                      {
+                        imageURL: route.params.imageURL,
+                        title: route.params.title,
+                        comments: route.params.comments,
+                        likes: route.params.likes,
+                        location: route.params.location,
+                        navigation: route.params.navigation,
+                      },
+                    ]
+                  : catalog
+              }
               navigation={navigation}
               option={'posts'}
             />

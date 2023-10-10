@@ -7,8 +7,6 @@ import {
 } from 'react-native';
 import { useState, useEffect, useReducer, useRef } from 'react';
 import { AntDesign, Entypo } from '@expo/vector-icons';
-import { Camera } from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
 
 const CreatePostsForm = ({
   navigation,
@@ -16,6 +14,7 @@ const CreatePostsForm = ({
   setLocation,
   name,
   setName,
+  uriPhoto,
 }) => {
   const [isFocused1, SetIsFocused1] = useState(false);
   const [isFocused2, SetIsFocused2] = useState(false);
@@ -34,8 +33,11 @@ const CreatePostsForm = ({
 
   const handleSubmit = () => {
     if (isPublishedButton) {
-      console.log('Submit');
-      navigation.navigate('Map', { locationName: location, name: name });
+      navigation.navigate('Map', {
+        locationName: location,
+        name: name,
+        uriPhoto: uriPhoto,
+      });
     }
   };
   return (
@@ -44,15 +46,8 @@ const CreatePostsForm = ({
         <TextInput
           type="name"
           name="name"
-          // pattern="([A-z0-9_.-]{1})@([A-z0-9_.-]{1}).([A-z]{28})"
           title="name"
           placeholder="Назва..."
-          // onFocus={() => {
-          //   SetIsFocused2(true);
-          // }}
-          // onBlur={() => {
-          //   SetIsFocused2(false);
-          // }}
           value={name}
           onChangeText={setName}
           style={
@@ -66,15 +61,8 @@ const CreatePostsForm = ({
           <TextInput
             type="url"
             name="location"
-            // pattern="([A-z0-9_.-]{1})@([A-z0-9_.-]{1}).([A-z]{28})"
             title="location"
             placeholder="Місцевість..."
-            //   onFocus={() => {
-            //     SetIsFocused2(true);
-            //   }}
-            // onBlur={() => {
-            //   SetIsFocused2(false);
-            // }}
             value={location}
             onChangeText={setLocation}
             style={

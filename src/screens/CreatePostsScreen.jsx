@@ -69,7 +69,7 @@ const CreatePostsScreen = ({ navigation }) => {
                       ]}
                       onPress={async () => {
                         if (cameraRef) {
-                          toggleCameraType();
+                          // toggleCameraType();
                           const { uri } = await cameraRef.takePictureAsync();
                           setUriPhoto(uri);
                           await MediaLibrary.createAssetAsync(uri);
@@ -98,6 +98,7 @@ const CreatePostsScreen = ({ navigation }) => {
               setLocation={setLocation}
               setName={setName}
               location={location}
+              uriPhoto={uriPhoto}
             ></CreatePostsForm>
           </View>
           <View style={styles.footer}>

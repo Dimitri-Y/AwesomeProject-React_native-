@@ -17,21 +17,21 @@ const catalog = [
     title: 'Ліс',
     comments: 8,
     likes: 153,
-    location: 'Ukraine',
+    location: { locationName: 'Ukraine' },
   },
   {
     imageURL: '../../assets/images/2.png',
     title: 'Захід на Чорному морі',
     comments: 3,
     likes: 200,
-    location: 'Ukraine',
+    location: { locationName: 'Ukraine' },
   },
   {
     imageURL: '../../assets/images/3.png',
     title: 'Старий будиночок у Венеції',
     comments: 50,
     likes: 200,
-    location: 'Italy',
+    location: { locationName: 'Italy' },
   },
 ];
 

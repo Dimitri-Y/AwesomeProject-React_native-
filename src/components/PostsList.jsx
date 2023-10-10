@@ -13,7 +13,8 @@ const PostsList = ({ option, catalog, navigation }) => {
             title={item.title}
             comments={item.comments}
             likes={item.likes}
-            location={item.location}
+            locationName={item.location.locationName}
+            locationURL={item.location.locationURL}
             navigation={navigation}
           />
         )}
@@ -30,7 +31,8 @@ const PostsList = ({ option, catalog, navigation }) => {
             imageURL={item.imageURL}
             title={item.title}
             comments={item.comments}
-            location={item.location}
+            locationName={item.location.locationName}
+            locationURL={item.location.locationURL}
             navigation={navigation}
           />
         )}
