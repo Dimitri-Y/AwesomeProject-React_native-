@@ -20,6 +20,8 @@ const PostsList = ({ option, catalog, navigation }) => {
         )}
         keyExtractor={item => item.id}
         style={styles.catalog}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
       />
     </SafeAreaView>
   ) : (
@@ -38,6 +40,8 @@ const PostsList = ({ option, catalog, navigation }) => {
         )}
         keyExtractor={item => item.id}
         style={styles.catalog}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
       />
     </SafeAreaView>
   );

@@ -26,7 +26,7 @@ export const Header = ({ option, title }) => {
       <TouchableOpacity
         style={styles.exitButton}
         activeOpacity={0.5}
-        onPress={() => navigation.navigate('Posts')}
+        onPress={() => navigation.goBack()}
       >
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>
