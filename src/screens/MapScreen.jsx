@@ -19,7 +19,6 @@ import Container from '../components/Container';
 
 const MapScreen = () => {
   const route = useRoute();
-  const [isRoute, setIsRoute] = useState(false);
   const isFocused = useIsFocused();
 
   const [locationName, setLocationName] = useState(route.params.locationName);
@@ -30,29 +29,38 @@ const MapScreen = () => {
   const navigation = useNavigation();
   const [location, setLocation] = useState(null);
   const TextInputRef = useRef();
+  const LocationKey = 'location-key';
 
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
+      if (title) {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        const coords = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        };
+        setLocation(coords);
       }
-
-      let location = await Location.getCurrentPositionAsync({});
-      const coords = {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      };
-      console.log(locationName);
-      console.log(route.params.locationName);
-      if (route.params.locationName === locationName) {
-        setIsRoute(true);
-      }
-      console.log(isRoute);
-      setLocation(coords);
     })();
   }, []);
 
   useEffect(() => {
+    (async () => {
+      if (title) {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        const coords = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        };
+        setLocation(coords);
+      }
+    })();
     setLocationName(route.params.locationName);
   }, [isFocused]);
 
@@ -60,13 +68,6 @@ const MapScreen = () => {
     <Container>
       <View style={styles.container}>
         <View style={styles.input_container}>
-          <TouchableOpacity
-            style={styles.backButton}
-            activeOpacity={0.5}
-            // onPress={}
-          >
-            <AntDesign name="arrowleft" size={25} color="black" />
-          </TouchableOpacity>
           <TextInput
             type="location"
             name="location"
@@ -77,13 +78,22 @@ const MapScreen = () => {
             style={[styles.input]}
             ref={TextInputRef}
           />
-          <TouchableOpacity
+          {location && (
+            <TouchableOpacity
+              style={styles.backTextButton}
+              activeOpacity={0.5}
+              onPress={() => navigation.navigate('CreatePosts')}
+            >
+              <AntDesign name="arrowleft" size={25} color="black" />
+            </TouchableOpacity>
+          )}
+          {/* <TouchableOpacity
             style={styles.searchButton}
             activeOpacity={0.5}
             // onPress={}
           >
             <AntDesign name="search1" size={25} color="black" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <MapView
           mapPadding={32}
@@ -121,7 +131,9 @@ const MapScreen = () => {
         <View style={styles.footer}>
           {locationURL ? (
             <TouchableOpacity
-              onPress={() => navigation.goBack()}
+              onPress={() => {
+                navigation.goBack();
+              }}
               style={styles.publishLink}
               activeOpacity={0.5}
             >
@@ -129,7 +141,7 @@ const MapScreen = () => {
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
-              onPress={() =>
+              onPress={() => {
                 navigation.navigate('Posts', {
                   imageURL: imageURL,
                   title: title,
@@ -139,8 +151,15 @@ const MapScreen = () => {
                     locationName: locationName,
                     locationURL: location,
                   },
-                })
-              }
+                });
+                Location.PermissionStatus.DENIED = 'denied';
+                // (async () => {
+                //   await Location.stopLocationUpdatesAsync(
+                //     Location.startLocationUpdatesAsync()
+                //   );
+                // })();
+                console.log(location);
+              }}
               style={styles.publishLink}
               activeOpacity={0.5}
             >
@@ -166,11 +185,11 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     justifyContent: 'center',
   },
-  backButton: {
+  backTextButton: {
     position: 'absolute',
     zIndex: 1,
     top: 46,
-    left: 8,
+    right: 8,
     height: 25,
     width: 25,
     pointerEvents: 'auto',
@@ -184,8 +203,8 @@ const styles = StyleSheet.create({
     borderColor: '#E8E8E8',
     borderRadius: 8,
     padding: 8,
-    paddingLeft: 41,
-    paddingRight: 41,
+    // paddingLeft: 41,
+    paddingRight: 74,
     width: '100%',
   },
   searchButton: {

@@ -10,31 +10,51 @@ import {
   Image,
 } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
-import { useState, useReducer, useEffect } from 'react';
+import { useState, useReducer, useEffect, useRef } from 'react';
+import { useIsFocused } from '@react-navigation/native';
 import CreatePostsForm from '../components/CreatePostsForm';
 import { Header } from '../components/Header';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
+import Loaders from 'react-native-pure-loaders';
 
 const CreatePostsScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const isFocused = useIsFocused();
+
   const [uriPhoto, setUriPhoto] = useState('');
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [isDelete, setIsDelete] = useState(false);
+  const [isLoader, setIsLoader] = useState(false);
+
   useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      await MediaLibrary.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  useEffect(() => {
+    setIsDelete(true);
+  }, [uriPhoto, name, location]);
+
+  useEffect(() => {
+    setLocation('');
+    setName('');
+    setUriPhoto('');
+    setIsLoader(false);
+    setIsDelete(false);
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       await MediaLibrary.requestPermissionsAsync();
 
       setHasPermission(status === 'granted');
     })();
-  }, []);
-  useEffect(() => {
-    setIsDelete(true);
-  }, [uriPhoto, name, location]);
+  }, [isFocused]);
 
   if (hasPermission === null) {
     return <View />;
@@ -66,15 +86,21 @@ const CreatePostsScreen = ({ navigation }) => {
                       style={[
                         styles.addPhoto_button,
                         uriPhoto !== '' && { display: 'none' },
+                        isLoader && { display: 'none' },
                       ]}
                       onPress={async () => {
                         if (cameraRef) {
-                          // toggleCameraType();
+                          setIsLoader(true);
+                          cameraRef.resumePreview();
                           const { uri } = await cameraRef.takePictureAsync();
                           setUriPhoto(uri);
+
                           await MediaLibrary.createAssetAsync(uri);
+                          // toggleCameraType();
+                          // !uri && setIsLoader(false);
                         }
                       }}
+                      disabled={isLoader}
                     >
                       <Entypo name="camera" size={24} color="#BDBDBD" />
                     </TouchableOpacity>
@@ -108,6 +134,7 @@ const CreatePostsScreen = ({ navigation }) => {
                   setUriPhoto('');
                   setName('');
                   setLocation('');
+                  setIsLoader(false);
                 }
               }}
               style={styles.deleteButton}
@@ -157,6 +184,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
+  },
+  loaderContainer: {
+    flex: 1,
+    backgroundColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
   },
   addPhoto_text: {
     fontFamily: 'Roboto-400',

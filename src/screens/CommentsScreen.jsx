@@ -7,12 +7,32 @@ import {
   Text,
   StyleSheet,
   TextInput,
+  SafeAreaView,
+  Image,
 } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useState, useReducer } from 'react';
-import { Header } from '../components/Header';
+import { useRoute } from '@react-navigation/native';
 
 const CommentsScreen = ({ navigation }) => {
+  const route = useRoute();
+  const imageURL = route.params.imageURL;
+  console.log(imageURL);
+  let imageUrl;
+  switch (imageURL) {
+    case '../../assets/images/1.png':
+      imageUrl = require('../../assets/images/1.png');
+      break;
+    case '../../assets/images/2.png':
+      imageUrl = require('../../assets/images/2.png');
+      break;
+    case '../../assets/images/3.png':
+      imageUrl = require('../../assets/images/3.png');
+      break;
+    default:
+      imageUrl = { uri: imageURL };
+      break;
+  }
   return (
     <Container>
       <KeyboardAvoidingView
@@ -22,12 +42,19 @@ const CommentsScreen = ({ navigation }) => {
         // enabled
       >
         <View style={styles.container}>
-          {/* <Header
-            title={'Коментарі'}
-            option={'comments'}
-            navigation={navigation}
-          /> */}
-          <View style={styles.main}></View>
+          <View style={styles.main}>
+            <SafeAreaView>
+              <TouchableOpacity activeOpacity={0.99}>
+                {imageURL && (
+                  <Image
+                    source={imageUrl}
+                    resizeMethod="resize"
+                    style={styles.image}
+                  />
+                )}
+              </TouchableOpacity>
+            </SafeAreaView>
+          </View>
           <View style={styles.footer}>
             <View style={styles.input_BG}>
               <TextInput
@@ -89,7 +116,13 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     padding: 16,
-    justifyContent: 'flex-end',
+  },
+  image: {
+    width: '100%',
+    height: 240,
+    borderRadius: 8,
+    // justifyContent: 'flex-end',
+    marginBottom: 32,
   },
   footer: {
     // flex: 1,
