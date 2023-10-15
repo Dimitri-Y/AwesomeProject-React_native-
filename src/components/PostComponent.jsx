@@ -38,9 +38,10 @@ const PostComponent = ({
             activeOpacity={0.5}
             onPress={() =>
               navigation.navigate('Comments', {
-                screen:
-                  navigation.getState().routes[navigation.getState().index]
-                    .name,
+                imageURL: imageURL,
+                // screen:
+                //   navigation.getState().routes[navigation.getState().index]
+                //     .name,
               })
             }
           >

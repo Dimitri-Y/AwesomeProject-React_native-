@@ -34,10 +34,10 @@ const CreatePostsScreen = ({ navigation }) => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       await MediaLibrary.requestPermissionsAsync();
-
       setHasPermission(status === 'granted');
     })();
   }, []);
+
   useEffect(() => {
     setIsDelete(true);
   }, [uriPhoto, name, location]);
@@ -47,6 +47,7 @@ const CreatePostsScreen = ({ navigation }) => {
     setName('');
     setUriPhoto('');
     setIsLoader(false);
+    setIsDelete(false);
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       await MediaLibrary.requestPermissionsAsync();
@@ -90,8 +91,8 @@ const CreatePostsScreen = ({ navigation }) => {
                       onPress={async () => {
                         if (cameraRef) {
                           setIsLoader(true);
+                          cameraRef.resumePreview();
                           const { uri } = await cameraRef.takePictureAsync();
-                          cameraRef.pausePreview();
                           setUriPhoto(uri);
 
                           await MediaLibrary.createAssetAsync(uri);
@@ -133,6 +134,7 @@ const CreatePostsScreen = ({ navigation }) => {
                   setUriPhoto('');
                   setName('');
                   setLocation('');
+                  setIsLoader(false);
                 }
               }}
               style={styles.deleteButton}
