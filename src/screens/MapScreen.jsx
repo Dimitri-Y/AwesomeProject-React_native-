@@ -89,6 +89,15 @@ const MapScreen = () => {
             }
             ref={TextInputRef}
           />
+          {location && (
+            <TouchableOpacity
+              style={styles.backTextButton}
+              activeOpacity={0.5}
+              onPress={() => navigation.navigate('CreatePosts')}
+            >
+              <AntDesign name="arrowleft" size={25} color="black" />
+            </TouchableOpacity>
+          )}
           {/* <TouchableOpacity
             style={styles.searchButton}
             activeOpacity={0.5}
