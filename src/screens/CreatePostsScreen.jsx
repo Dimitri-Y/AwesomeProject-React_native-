@@ -78,7 +78,7 @@ const CreatePostsScreen = ({ navigation }) => {
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.addPhoto_view}>
-              {uriPhoto === '' ? (
+              {isFocused && uriPhoto === '' ? (
                 <Camera style={styles.camera} type={type} ref={setCameraRef}>
                   <View style={styles.addPhoto_view_button}>
                     <TouchableOpacity
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     color: '#BDBDBD',
   },
   footer: {
-    // flex: 1,
+    flex: 1,
     padding: 16,
     justifyContent: 'center',
     alignItems: 'center',

@@ -61,7 +61,7 @@ const LoginForm = ({ onSubmit, navigation }) => {
   };
 
   const passShow = event => {
-    setSecureText(!secureText ? false : true);
+    setSecureText(secureText ? false : true);
   };
 
   return (
@@ -129,7 +129,9 @@ const LoginForm = ({ onSubmit, navigation }) => {
           activeOpacity={0.5}
           onPress={passShow}
         >
-          <Text style={styles.passShowText}>Показати</Text>
+          <Text style={styles.passShowText}>
+            {secureText ? 'Показати' : 'Сховати'}
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity

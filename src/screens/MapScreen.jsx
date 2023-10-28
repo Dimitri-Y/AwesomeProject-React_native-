@@ -68,16 +68,6 @@ const MapScreen = () => {
     <Container>
       <View style={styles.container}>
         <View style={styles.input_container}>
-          <TextInput
-            type="location"
-            name="location"
-            title="location"
-            placeholder="Місцевість..."
-            value={locationName}
-            onChangeText={setLocationName}
-            style={[styles.input]}
-            ref={TextInputRef}
-          />
           {location && (
             <TouchableOpacity
               style={styles.backTextButton}
@@ -87,6 +77,18 @@ const MapScreen = () => {
               <AntDesign name="arrowleft" size={25} color="black" />
             </TouchableOpacity>
           )}
+          <TextInput
+            type="location"
+            name="location"
+            title="location"
+            placeholder="Місцевість..."
+            value={locationName}
+            onChangeText={setLocationName}
+            style={
+              location ? [styles.input] : [styles.input, styles.input_default]
+            }
+            ref={TextInputRef}
+          />
           {/* <TouchableOpacity
             style={styles.searchButton}
             activeOpacity={0.5}
@@ -183,13 +185,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     paddingTop: 30,
+    marginTop: 10,
     justifyContent: 'center',
   },
   backTextButton: {
     position: 'absolute',
     zIndex: 1,
-    top: 46,
-    right: 8,
+    top: 43,
+    left: 8,
     height: 25,
     width: 25,
     pointerEvents: 'auto',
@@ -203,9 +206,12 @@ const styles = StyleSheet.create({
     borderColor: '#E8E8E8',
     borderRadius: 8,
     padding: 8,
-    // paddingLeft: 41,
+    paddingLeft: 41,
     paddingRight: 74,
     width: '100%',
+  },
+  input_default: {
+    paddingLeft: 8,
   },
   searchButton: {
     position: 'absolute',
@@ -221,10 +227,11 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height - 90,
+    height: Dimensions.get('window').height - 10,
+    flex: 1,
   },
   footer: {
-    flex: 1,
+    // flex: 1,
     // backgroundColor: 'rgba(255,255,255,1)',
     // paddingBottom: 30,
   },
@@ -234,7 +241,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     // borderRadius: 100,
-    marginBottom: 16,
+    // marginBottom: 16,
   },
   publishLinkText: {
     color: 'white',
