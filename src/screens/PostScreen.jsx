@@ -1,6 +1,5 @@
 import Container from '../components/Container';
 import { KeyboardAvoidingView, Platform, View, StyleSheet } from 'react-native';
-import { Header } from '../components/Header';
 import PostsList from '../components/PostsList';
 import { useRoute } from '@react-navigation/native';
 
