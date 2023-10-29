@@ -8,15 +8,16 @@ import {
   StyleSheet,
   TextInput,
   Image,
+  SafeAreaView,
+  ScrollView,
 } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useState, useReducer, useEffect, useRef } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import CreatePostsForm from '../components/CreatePostsForm';
-import { Header } from '../components/Header';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
-import Loaders from 'react-native-pure-loaders';
+import * as Location from 'expo-location';
 
 const CreatePostsScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -36,6 +37,11 @@ const CreatePostsScreen = ({ navigation }) => {
       await MediaLibrary.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+      }
+    })();
   }, []);
 
   useEffect(() => {
@@ -53,6 +59,11 @@ const CreatePostsScreen = ({ navigation }) => {
       await MediaLibrary.requestPermissionsAsync();
 
       setHasPermission(status === 'granted');
+    })();
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+      }
     })();
   }, [isFocused]);
 
@@ -76,73 +87,77 @@ const CreatePostsScreen = ({ navigation }) => {
         // enabled
       >
         <View style={styles.container}>
-          <View style={styles.main}>
-            <View style={styles.addPhoto_view}>
-              {isFocused && uriPhoto === '' ? (
-                <Camera style={styles.camera} type={type} ref={setCameraRef}>
-                  <View style={styles.addPhoto_view_button}>
-                    <TouchableOpacity
-                      activeOpacity={0.5}
-                      style={[
-                        styles.addPhoto_button,
-                        uriPhoto !== '' && { display: 'none' },
-                        isLoader && { display: 'none' },
-                      ]}
-                      onPress={async () => {
-                        if (cameraRef) {
-                          setIsLoader(true);
-                          cameraRef.resumePreview();
-                          const { uri } = await cameraRef.takePictureAsync();
-                          setUriPhoto(uri);
+          <ScrollView style={styles.main}>
+            <TouchableOpacity activeOpacity={0.99}>
+              <View style={styles.addPhoto_view}>
+                {isFocused && uriPhoto === '' ? (
+                  <Camera style={styles.camera} type={type} ref={setCameraRef}>
+                    <View style={styles.addPhoto_view_button}>
+                      <TouchableOpacity
+                        activeOpacity={0.5}
+                        style={[
+                          styles.addPhoto_button,
+                          uriPhoto !== '' && { display: 'none' },
+                          isLoader && { display: 'none' },
+                        ]}
+                        onPress={async () => {
+                          if (cameraRef) {
+                            setIsLoader(true);
+                            cameraRef.resumePreview();
+                            const { uri } = await cameraRef.takePictureAsync();
+                            setUriPhoto(uri);
 
-                          await MediaLibrary.createAssetAsync(uri);
-                          // toggleCameraType();
-                          // !uri && setIsLoader(false);
-                        }
-                      }}
-                      disabled={isLoader}
-                    >
-                      <Entypo name="camera" size={24} color="#BDBDBD" />
-                    </TouchableOpacity>
-                  </View>
-                </Camera>
-              ) : (
-                <Image
-                  source={{ uri: uriPhoto }}
-                  style={{ width: '100%', height: '100%' }}
-                />
-              )}
-            </View>
-            <TouchableOpacity activeOpacity={0.5}>
-              <Text style={styles.addPhoto_text}>
-                {uriPhoto !== '' ? 'Редагувати фото' : 'Завантажте фото'}
-              </Text>
+                            await MediaLibrary.createAssetAsync(uri);
+                            // toggleCameraType();
+                            // !uri && setIsLoader(false);
+                          }
+                        }}
+                        disabled={isLoader}
+                      >
+                        <Entypo name="camera" size={24} color="#BDBDBD" />
+                      </TouchableOpacity>
+                    </View>
+                  </Camera>
+                ) : (
+                  uriPhoto !== '' && (
+                    <Image
+                      source={{ uri: uriPhoto }}
+                      style={{ width: '100%', height: '100%' }}
+                    />
+                  )
+                )}
+              </View>
+              <TouchableOpacity activeOpacity={0.5}>
+                <Text style={styles.addPhoto_text}>
+                  {uriPhoto !== '' ? 'Редагувати фото' : 'Завантажте фото'}
+                </Text>
+              </TouchableOpacity>
+              <CreatePostsForm
+                navigation={navigation}
+                name={name}
+                setLocation={setLocation}
+                setName={setName}
+                location={location}
+                uriPhoto={uriPhoto}
+              ></CreatePostsForm>
+              <View style={styles.footer}>
+                <TouchableOpacity
+                  onPress={() => {
+                    if (isDelete) {
+                      setUriPhoto('');
+                      setName('');
+                      setLocation('');
+                      setIsLoader(false);
+                    }
+                  }}
+                  style={styles.deleteButton}
+                  activeOpacity={0.5}
+                >
+                  <AntDesign name="delete" size={24} color={'#BDBDBD'} />
+                </TouchableOpacity>
+              </View>
             </TouchableOpacity>
-            <CreatePostsForm
-              navigation={navigation}
-              name={name}
-              setLocation={setLocation}
-              setName={setName}
-              location={location}
-              uriPhoto={uriPhoto}
-            ></CreatePostsForm>
-          </View>
-          <View style={styles.footer}>
-            <TouchableOpacity
-              onPress={() => {
-                if (isDelete) {
-                  setUriPhoto('');
-                  setName('');
-                  setLocation('');
-                  setIsLoader(false);
-                }
-              }}
-              style={styles.deleteButton}
-              activeOpacity={0.5}
-            >
-              <AntDesign name="delete" size={24} color={'#BDBDBD'} />
-            </TouchableOpacity>
-          </View>
+          </ScrollView>
         </View>
       </KeyboardAvoidingView>
     </Container>
@@ -152,7 +167,7 @@ const CreatePostsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
+    // justifyContent: 'flex-end',
   },
   containerKeyB: {
     flex: 1,
@@ -200,15 +215,16 @@ const styles = StyleSheet.create({
     color: '#BDBDBD',
   },
   footer: {
-    flex: 1,
-    padding: 16,
-    justifyContent: 'center',
+    // flex: 1,
+    paddingTop: 16,
+    paddingBottom: 32,
     alignItems: 'center',
     // gap: 31,
   },
   deleteButton: {
     height: 25,
     width: 25,
+    marginTop: 'auto',
     justifyContent: 'center',
     alignItems: 'center',
     pointerEvents: 'auto',

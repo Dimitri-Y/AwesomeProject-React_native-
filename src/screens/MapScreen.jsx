@@ -34,9 +34,6 @@ const MapScreen = () => {
   useEffect(() => {
     (async () => {
       if (title) {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-        }
         let location = await Location.getCurrentPositionAsync({});
         const coords = {
           latitude: location.coords.latitude,

@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
-    marginTop: 32,
+    // marginTop: 32,
     marginBottom: 'auto',
   },
 });
