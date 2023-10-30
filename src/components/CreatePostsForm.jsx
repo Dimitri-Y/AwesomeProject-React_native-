@@ -11,6 +11,7 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 const CreatePostsForm = ({
   navigation,
   location,
+  locationURL,
   setLocation,
   name,
   setName,
@@ -33,10 +34,15 @@ const CreatePostsForm = ({
 
   const handleSubmit = () => {
     if (isPublishedButton) {
-      navigation.navigate('Map', {
-        locationName: location,
-        name: name,
-        uriPhoto: uriPhoto,
+      navigation.navigate('Posts', {
+        imageURL: uriPhoto,
+        title: name,
+        comments: 0,
+        likes: 0,
+        location: {
+          locationName: location,
+          locationURL: locationURL,
+        },
       });
     }
   };
