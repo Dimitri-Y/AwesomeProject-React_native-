@@ -30,7 +30,7 @@ const CreatePostsScreen = ({ navigation }) => {
   const [location, setLocation] = useState('');
   const [isDelete, setIsDelete] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
-
+  const [locationURL, setLocationURL] = useState('');
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -39,7 +39,13 @@ const CreatePostsScreen = ({ navigation }) => {
     })();
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
+      if (status === 'granted') {
+        let locationURL = await Location.getCurrentPositionAsync({});
+        const coords = {
+          latitude: locationURL.coords.latitude,
+          longitude: locationURL.coords.longitude,
+        };
+        setLocationURL(coords);
       }
     })();
   }, []);
@@ -62,7 +68,13 @@ const CreatePostsScreen = ({ navigation }) => {
     })();
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
+      if (status === 'granted') {
+        let locationURL = await Location.getCurrentPositionAsync({});
+        const coords = {
+          latitude: locationURL.coords.latitude,
+          longitude: locationURL.coords.longitude,
+        };
+        setLocationURL(coords);
       }
     })();
   }, [isFocused]);
@@ -139,6 +151,7 @@ const CreatePostsScreen = ({ navigation }) => {
                 setName={setName}
                 location={location}
                 uriPhoto={uriPhoto}
+                locationURL={locationURL}
               ></CreatePostsForm>
               <View style={styles.footer}>
                 <TouchableOpacity
